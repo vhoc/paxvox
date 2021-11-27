@@ -1,0 +1,17 @@
+
+h1, h3 {
+    color: white;
+}
+
+.datosClienteWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    min-height:auto;
+}
+
+.datosClienteWrapper p {
+    color: white;
+}
