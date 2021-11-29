@@ -10,10 +10,11 @@ function App() {
 
   const question1Ref = useRef()
   const question2Ref = useRef()
+  const question3Ref = useRef()
+  const question4Ref = useRef()
+  const question5Ref = useRef()
 
-  const goToNext = () => {
-    console.log( question2Ref.current )
-  }
+  
 
   return (
     <div className="App">
@@ -30,7 +31,6 @@ function App() {
           inputName="frecuencia-visita"
           nextId="#atencion-mesero"
           title="¿Qué tan seguido nos visitas?"
-          onClick={ goToNext }
         />
         <Question
           key="q2"
@@ -41,18 +41,21 @@ function App() {
         />
         <Question
           key="q3"
+          ref={ question3Ref }
           inputName="rapidez-servicio"
           nextId="#calidad-comida"
           title="Rapidez en el Servicio"
         />
         <Question
           key="q4"
+          ref={ question4Ref }
           inputName="calidad-comida"
           nextId="#experiencia-general"
           title="Sabor y Frescura de la Comida"
         />
         <Question
           key="q5"
+          ref={ question5Ref }
           inputName="experiencia-general"
           nextId="#datos-cliente"
           title="¿Cual fue tu experiencia general en Mariscos El Rey?"

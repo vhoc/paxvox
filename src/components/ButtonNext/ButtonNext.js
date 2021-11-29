@@ -8,7 +8,9 @@ const ButtonNext = ( props ) => {
     return(
 
         <>
-            <Button variant="outline-warning" size="lg" href={ props.id } className="buttonNext"><FaArrowDown/></Button>
+            <Button variant="outline-warning" size="lg" href={ props.id } className="buttonNext">
+                <FaArrowDown/>
+            </Button>
         </>
 
     )

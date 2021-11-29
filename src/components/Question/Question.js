@@ -4,11 +4,19 @@ import { Form } from "react-bootstrap"
 //import StarRating from "../StarRating/StarRating"
 import ButtonNext from "../ButtonNext/ButtonNext"
 import { FaStar } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 
 const Question = ( { key, inputName, nextId, title }, ref ) => {
 
     const [ rating , setRating ]    = useState( null )
     const [ hover , setHover ]      = useState( null )
+
+    //const navigate = useNavigate()
+
+    /*const routeChange = () => {
+        let path = '#' + nextId
+        navigate.push( path )
+    }*/
 
     return (
 
@@ -24,13 +32,13 @@ const Question = ( { key, inputName, nextId, title }, ref ) => {
                             return ( 
                                 
                                 <Form.Label>
-                                    
                                     <Form.Control
+                                        ref={ ref }
                                         key={ "radio-" + i }
                                         type="radio"
                                         name={ inputName }
                                         value={ ratingValue }
-                                        onClick={ () => { setRating( ratingValue ); console.log( ref.current ) } }
+                                        
                                     />
                                     <FaStar
                                         key={ "star-" + i }
@@ -38,6 +46,7 @@ const Question = ( { key, inputName, nextId, title }, ref ) => {
                                         color={ ratingValue <= ( hover || rating ) ? "#ffc107" : "#e4e5e9" }
                                         onMouseEnter={ () => setHover( ratingValue ) }
                                         onMouseLeave={ () => setHover( null ) }
+                                        
                                     />
 
                                 </Form.Label>
@@ -56,4 +65,4 @@ const Question = ( { key, inputName, nextId, title }, ref ) => {
 
 const forwardedQuestion = forwardRef( Question )
 
-export default Question
+export default forwardedQuestion
