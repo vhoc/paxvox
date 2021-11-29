@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, forwardRef } from "react"
 import Select from "react-select"
 import ButtonNext from '../ButtonNext/ButtonNext'
 
@@ -13,7 +13,7 @@ const meserosEjemplo = [
     }
 ]
 
-const Selector = ( props ) => {
+const Selector = ( props, ref ) => {
 
     const [ value , setValue ] = useState({})
 
@@ -21,7 +21,7 @@ const Selector = ( props ) => {
 
         <>
 
-            <div id={ props.inputName } className="questionWrapper col-10 col-sm-8" >
+            <div id={ props.inputName } className="questionWrapper col-10 col-sm-8" ref={ ref }>
                 <h1>{ props.title }</h1>
                 <Select
                     aria-label="Selecciona tu mesero"
@@ -32,7 +32,6 @@ const Selector = ( props ) => {
                     getOptionLabel={ (option) => option.name }
                     getOptionValue={ (option) => option.value }
                 />
-                <ButtonNext id={ props.nextId } />
             </div>
 
             
@@ -43,4 +42,4 @@ const Selector = ( props ) => {
 
 }
 
-export default Selector
+export default forwardRef( Selector )

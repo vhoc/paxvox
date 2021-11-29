@@ -1,11 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, forwardRef } from "react"
 import './Question.css'
 import { Form } from "react-bootstrap"
 //import StarRating from "../StarRating/StarRating"
 import ButtonNext from "../ButtonNext/ButtonNext"
 import { FaStar } from 'react-icons/fa'
 
-const Question = ( { key, inputName, nextId, title, onClick } ) => {
+const Question = ( { key, inputName, nextId, title, onClick }, ref ) => {
 
     const [ rating , setRating ]    = useState( null )
     const [ hover , setHover ]      = useState( null )
@@ -20,7 +20,7 @@ const Question = ( { key, inputName, nextId, title, onClick } ) => {
     return (
 
             <>
-                <div id={ inputName } className="questionWrapper" >
+                <div id={ inputName } className="questionWrapper" ref={ ref }>
                     <h1>{ title }</h1>
                     <div>
                         
@@ -53,7 +53,6 @@ const Question = ( { key, inputName, nextId, title, onClick } ) => {
 
                         }
                     </div>
-                    <ButtonNext id={ nextId } />
                 </div>
             </>
 
@@ -61,4 +60,4 @@ const Question = ( { key, inputName, nextId, title, onClick } ) => {
 
 }
 
-export default Question
+export default forwardRef( Question )

@@ -1,14 +1,14 @@
-import React from "react"
+import React, { forwardRef } from "react"
 import './DatosCliente.css'
 import Form from 'react-bootstrap/Form'
 import ButtonSend from "../ButtonSend/ButtonSend"
 
-const DatosCliente = () => {
+const DatosCliente = ( props, ref ) => {
 
     return (
 
         <>
-            <div id="datos-cliente" className="datosClienteWrapper">
+            <div id="datos-cliente" className="datosClienteWrapper" ref={ ref }>
                 <h1>¿Puedes contarnos un poco de ti?</h1>
                 <h3>Es opcional &#128521;</h3>
                 
@@ -39,4 +39,4 @@ const DatosCliente = () => {
 
 }
 
-export default DatosCliente
+export default forwardRef( DatosCliente )
