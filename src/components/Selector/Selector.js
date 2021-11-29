@@ -1,6 +1,5 @@
 import React, { useState, forwardRef } from "react"
 import Select from "react-select"
-import ButtonNext from '../ButtonNext/ButtonNext'
 
 const meserosEjemplo = [
     {

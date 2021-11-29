@@ -1,21 +1,14 @@
 import React, { useState, forwardRef } from "react"
 import './Question.css'
 import { Form } from "react-bootstrap"
-//import StarRating from "../StarRating/StarRating"
 import ButtonNext from "../ButtonNext/ButtonNext"
 import { FaStar } from 'react-icons/fa'
 
-const Question = ( { key, inputName, nextId, title, onClick }, ref ) => {
+const Question = ( { inputName, title, onClick }, ref ) => {
 
     const [ rating , setRating ]    = useState( null )
     const [ hover , setHover ]      = useState( null )
 
-    //const navigate = useNavigate()
-
-    /*const routeChange = () => {
-        let path = '#' + nextId
-        navigate.push( path )
-    }*/
 
     return (
 
@@ -36,6 +29,7 @@ const Question = ( { key, inputName, nextId, title, onClick }, ref ) => {
                                         type="radio"
                                         name={ inputName }
                                         value={ ratingValue }
+                                        onClick={ () => setRating( ratingValue ) }
                                         
                                     />
                                     <FaStar
