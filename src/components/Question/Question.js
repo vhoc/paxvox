@@ -1,12 +1,11 @@
-import React, { useState, forwardRef } from "react"
+import React, { useState } from "react"
 import './Question.css'
 import { Form } from "react-bootstrap"
 //import StarRating from "../StarRating/StarRating"
 import ButtonNext from "../ButtonNext/ButtonNext"
 import { FaStar } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
 
-const Question = ( { key, inputName, nextId, title }, ref ) => {
+const Question = ( { key, inputName, nextId, title, onClick } ) => {
 
     const [ rating , setRating ]    = useState( null )
     const [ hover , setHover ]      = useState( null )
@@ -33,7 +32,6 @@ const Question = ( { key, inputName, nextId, title }, ref ) => {
                                 
                                 <Form.Label>
                                     <Form.Control
-                                        ref={ ref }
                                         key={ "radio-" + i }
                                         type="radio"
                                         name={ inputName }
@@ -46,7 +44,7 @@ const Question = ( { key, inputName, nextId, title }, ref ) => {
                                         color={ ratingValue <= ( hover || rating ) ? "#ffc107" : "#e4e5e9" }
                                         onMouseEnter={ () => setHover( ratingValue ) }
                                         onMouseLeave={ () => setHover( null ) }
-                                        
+                                        onClick={ onClick }
                                     />
 
                                 </Form.Label>
@@ -63,6 +61,4 @@ const Question = ( { key, inputName, nextId, title }, ref ) => {
 
 }
 
-const forwardedQuestion = forwardRef( Question )
-
-export default forwardedQuestion
+export default Question

@@ -15,7 +15,7 @@ const meserosEjemplo = [
 
 const Selector = ( props ) => {
 
-    const [ value , setValue ] = useState({})    
+    const [ value , setValue ] = useState({})
 
     return(
 
@@ -28,7 +28,7 @@ const Selector = ( props ) => {
                     name={ props.inputName }
                     options={ meserosEjemplo }
                     value={ value }
-                    onChange={ setValue }
+                    onChange={ e => { setValue(e); props.onSelect(e); } }
                     getOptionLabel={ (option) => option.name }
                     getOptionValue={ (option) => option.value }
                 />
