@@ -28,16 +28,16 @@ function App() {
    */
   const meserosEjemplo = [
     {
-      name: 'Mesero 1',
       value: 'Mesero 1',
+      label: 'Mesero 1',
     },
     {
-      name: 'Mesero 2',
       value: 'Mesero 2',
+      label: 'Mesero 2',
     },
     {
-      name: 'Mesero 3',
       value: 'Mesero 3',
+      label: 'Mesero 3',
     }
   ]
 
@@ -111,14 +111,14 @@ function App() {
             ref={questionNombreMeseroRef}
             aria-label="Selecciona tu mesero"
             name="nombre-mesero"
-            value={nombreMesero}
             options={meserosEjemplo}
             onChange={(e) => {
               setNombreMesero(e.value)
               scrollHandler(componentFrecuenciaVisitaRef)
+              console.log(formData.mesero)
             }}
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.value}
+            /*getOptionLabel={(option) => option.label}*/
+            /*getOptionValue={(option) => option.value}*/
           />
         </div>
 
