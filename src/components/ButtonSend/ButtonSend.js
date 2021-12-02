@@ -8,7 +8,7 @@ const ButtonSend = ( props ) => {
     return(
 
         <>
-            <Button variant="primary" size="lg" href={ props.id } className="buttonSend"><FaTelegramPlane/> Finalizar</Button>
+            <Button variant="primary" size="lg" href={ props.id } className="buttonSend" ><FaTelegramPlane/> Finalizar</Button>
         </>
 
     )

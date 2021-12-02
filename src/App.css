@@ -20,3 +20,28 @@ input[ type="radio" ] {
 .App-link {
   color: #61dafb;
 }
+
+h1, h3 {
+  color: white;
+}
+
+.datosClienteWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  min-height:auto;
+}
+
+.datosClienteWrapper p {
+  color: white;
+}
+
+.buttonSend {
+  margin-top: 1rem;
+  width: 35%;
+  align-self: center;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}

@@ -27,7 +27,7 @@ const Selector = ( props, ref ) => {
                     name={ props.inputName }
                     options={ meserosEjemplo }
                     value={ value }
-                    onChange={ e => { setValue(e); props.onSelect(e); } }
+                    onChange={ e => { setValue(e.value); props.onSelect(e); props.onChange(e) } }
                     getOptionLabel={ (option) => option.name }
                     getOptionValue={ (option) => option.value }
                 />
