@@ -8,6 +8,10 @@ import Button from 'react-bootstrap/Button'
 import { FaTelegramPlane } from 'react-icons/fa'
 
 function App() {
+
+  /**
+   * States
+   */
   const [nombreMesero, setNombreMesero] = useState(undefined)
   const [frecuenciaVisita, setFrecuenciaVisita] = useState('')
   const [atencionMesero, setAtencionMesero] = useState('')
@@ -31,8 +35,15 @@ function App() {
       name: 'Mesero 2',
       value: 'Mesero 2',
     },
+    {
+      name: 'Mesero 3',
+      value: 'Mesero 3',
+    }
   ]
 
+  /**
+   * References
+   */
   const questionNombreMeseroRef = useRef()
   const questionFrecuenciaVisitaRef = useRef()
   const questionAtencionMeseroRef = useRef()
@@ -45,9 +56,11 @@ function App() {
   const componentRapidezServicioRef = useRef()
   const componentCalidadComidaRef = useRef()
   const componentExperienciaGeneralRef = useRef()
-
   const d1 = useRef()
 
+  /**
+   * Form Data object
+   */
   const formData = {
     mesero: nombreMesero,
     frecuenciaVisita: frecuenciaVisita,
@@ -66,13 +79,7 @@ function App() {
     console.log(formData)
   }
 
-  const scrollHandler = (ref) => {
-    window.scrollTo({
-      behaviour: 'smooth',
-      top: ref.current.offsetTop,
-    })
-  }
-
+  /** Event Handlers */
   const handleChangeFrecuenciaVisita = (event) => setFrecuenciaVisita(event.target.value)
   const handleChangeAtencionMesero = (event) => setAtencionMesero(event.target.value)
   const handleChangeRapidezServicio = (event) => setRapidezServicio(event.target.value)
@@ -81,6 +88,16 @@ function App() {
   const handleChangeClienteNombre = (event) => setClienteNombre( event.target.value )
   const handleChangeClienteEmail = (event) => setClienteEmail(event.target.value)
   const handleChangeClienteTelefono = (event) => setClienteTelefono(event.target.value)
+
+  /**
+   * Other Handlers
+   */
+  const scrollHandler = (ref) => {
+    window.scrollTo({
+      behaviour: 'smooth',
+      top: ref.current.offsetTop,
+    })
+  }
 
   return (
     <div className="App">
