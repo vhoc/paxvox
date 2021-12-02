@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# paxvox
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A frontend for a restaurant-oriented poll system.
 
 ## Available Scripts
 
