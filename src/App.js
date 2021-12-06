@@ -5,6 +5,7 @@ import Question from './components/Question/Question'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import FieldSelectMeseros from './components/FieldSelectMeseros/FieldSelectMeseros'
+import FieldColorSelect from './components/FieldColorSelect/FieldColorSelect'
 import { FaTelegramPlane } from 'react-icons/fa'
 
 function App() {
@@ -58,22 +59,14 @@ function App() {
   }
 
   /** Event Handlers */
-  const handleChangeFrecuenciaVisita = (event) =>
-    setFrecuenciaVisita(event.target.value)
-  const handleChangeAtencionMesero = (event) =>
-    setAtencionMesero(event.target.value)
-  const handleChangeRapidezServicio = (event) =>
-    setRapidezServicio(event.target.value)
-  const handleChangeCalidadComida = (event) =>
-    setCalidadComida(event.target.value)
-  const handleChangeExperienciaGeneral = (event) =>
-    setExperienciaGeneral(event.target.value)
-  const handleChangeClienteNombre = (event) =>
-    setClienteNombre(event.target.value)
-  const handleChangeClienteEmail = (event) =>
-    setClienteEmail(event.target.value)
-  const handleChangeClienteTelefono = (event) =>
-    setClienteTelefono(event.target.value)
+  const handleChangeFrecuenciaVisita = (event) => setFrecuenciaVisita(event.target.value)
+  const handleChangeAtencionMesero = (event) => setAtencionMesero(event.target.value)
+  const handleChangeRapidezServicio = (event) => setRapidezServicio(event.target.value)
+  const handleChangeCalidadComida = (event) => setCalidadComida(event.target.value)
+  const handleChangeExperienciaGeneral = (event) => setExperienciaGeneral(event.target.value)
+  const handleChangeClienteNombre = (event) => setClienteNombre(event.target.value)
+  const handleChangeClienteEmail = (event) => setClienteEmail(event.target.value)
+  const handleChangeClienteTelefono = (event) => setClienteTelefono(event.target.value)
 
   /**
    * Handler for the scroll that triggers when a user
@@ -100,6 +93,7 @@ function App() {
         className="d-flex flex-column align-items-center"
         onSubmit={handleSubmit}
       >
+
         <FieldSelectMeseros
           title="Selecciona tu mesero"
           forwardedNextRef={componentFrecuenciaVisitaRef}
@@ -107,17 +101,13 @@ function App() {
           setNombreMesero={ nombreMesero => setNombreMesero(nombreMesero) }
           handleChildScroll={ handleChildScroll }
         />
-        
-        <Question
+
+        <FieldColorSelect
           ref={componentFrecuenciaVisitaRef}
+          title="¿Cada cuándo nos visitas?"
           inputName="frecuencia-visita"
-          nextId="#atencion-mesero"
-          title="¿Qué tan seguido nos visitas?"
-          value={frecuenciaVisita}
-          onChangeValue={handleChangeFrecuenciaVisita}
-          onClick={(e) => {
-            scrollHandler(componentAtencionMeseroRef)
-          }}
+          setFrecuenciaVisita={ frecuenciaVisita => setFrecuenciaVisita(frecuenciaVisita) }
+          onClick={() => scrollHandler(componentAtencionMeseroRef)}
         />
 
         <Question
