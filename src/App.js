@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { FaTelegramPlane } from 'react-icons/fa'
-import FieldSelect from './components/FieldSelect/FieldSelect'
+import FieldSelectMeseros from './components/FieldSelectMeseros/FieldSelectMeseros'
 
 function App() {
   /**
@@ -135,7 +135,8 @@ function App() {
         className="d-flex flex-column align-items-center"
         onSubmit={handleSubmit}
       >
-        <FieldSelect
+        <FieldSelectMeseros
+          title="Selecciona tu mesero"
           forwardedRef={questionNombreMeseroRef}
           forwardedNextRef={componentFrecuenciaVisitaRef}
           locationId="1"
