@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import './App.css'
 import Question from './components/Question/Question'
 import 'bootstrap/dist/css/bootstrap.min.css'
@@ -6,9 +6,9 @@ import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
 import Button from 'react-bootstrap/Button'
 import { FaTelegramPlane } from 'react-icons/fa'
+//import FieldSelect from './components/FieldSelect/FieldSelect'
 
 function App() {
-
   /**
    * States
    */
@@ -21,25 +21,9 @@ function App() {
   const [clienteNombre, setClienteNombre] = useState('')
   const [clienteEmail, setClienteEmail] = useState('')
   const [clienteTelefono, setClienteTelefono] = useState('')
-
-  /*
-   * Listado temporal de meseros.
-   * Obtener desde la nube después
-   */
-  const meserosEjemplo = [
-    {
-      value: 'Mesero 1',
-      label: 'Mesero 1',
-    },
-    {
-      value: 'Mesero 2',
-      label: 'Mesero 2',
-    },
-    {
-      value: 'Mesero 3',
-      label: 'Mesero 3',
-    }
-  ]
+  const [optionsMeseros, setOptionsMeseros] = useState([
+    { name: 'Cargando...', id: '0' },
+  ])
 
   /**
    * References
@@ -73,6 +57,10 @@ function App() {
     clienteTelefono: clienteTelefono,
   }
 
+  /**
+   * Handler for the form submission.
+   * @param {*} event
+   */
   const handleSubmit = (event) => {
     event.preventDefault()
 
@@ -80,17 +68,26 @@ function App() {
   }
 
   /** Event Handlers */
-  const handleChangeFrecuenciaVisita = (event) => setFrecuenciaVisita(event.target.value)
-  const handleChangeAtencionMesero = (event) => setAtencionMesero(event.target.value)
-  const handleChangeRapidezServicio = (event) => setRapidezServicio(event.target.value)
-  const handleChangeCalidadComida = (event) => setCalidadComida(event.target.value)
-  const handleChangeExperienciaGeneral = (event) => setExperienciaGeneral(event.target.value)
-  const handleChangeClienteNombre = (event) => setClienteNombre( event.target.value )
-  const handleChangeClienteEmail = (event) => setClienteEmail(event.target.value)
-  const handleChangeClienteTelefono = (event) => setClienteTelefono(event.target.value)
+  const handleChangeFrecuenciaVisita = (event) =>
+    setFrecuenciaVisita(event.target.value)
+  const handleChangeAtencionMesero = (event) =>
+    setAtencionMesero(event.target.value)
+  const handleChangeRapidezServicio = (event) =>
+    setRapidezServicio(event.target.value)
+  const handleChangeCalidadComida = (event) =>
+    setCalidadComida(event.target.value)
+  const handleChangeExperienciaGeneral = (event) =>
+    setExperienciaGeneral(event.target.value)
+  const handleChangeClienteNombre = (event) =>
+    setClienteNombre(event.target.value)
+  const handleChangeClienteEmail = (event) =>
+    setClienteEmail(event.target.value)
+  const handleChangeClienteTelefono = (event) =>
+    setClienteTelefono(event.target.value)
 
   /**
-   * Other Handlers
+   * Handler for the scroll that triggers when a user
+   * selects and option.
    */
   const scrollHandler = (ref) => {
     window.scrollTo({
@@ -99,8 +96,38 @@ function App() {
     })
   }
 
+  /**
+   * Get a list of waiters (meseros) from our API
+   * and save them into their State.
+   */
+  useEffect(() => {
+    fetch(`https://paxvox.waxy.app/api/waiters/1`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        const meseros = []
+
+        for (const key in data) {
+          const mesero = {
+            id: key,
+            name: data[key].name,
+          }
+          meseros.push(mesero)
+        }
+
+        setOptionsMeseros(meseros)
+      })
+  }, [])
+
   return (
     <div className="App">
+
       <Form
         className="d-flex flex-column align-items-center"
         onSubmit={handleSubmit}
@@ -111,14 +138,13 @@ function App() {
             ref={questionNombreMeseroRef}
             aria-label="Selecciona tu mesero"
             name="nombre-mesero"
-            options={meserosEjemplo}
+            options={optionsMeseros}
             onChange={(e) => {
-              setNombreMesero(e.value)
+              setNombreMesero(e.id)
               scrollHandler(componentFrecuenciaVisitaRef)
-              console.log(formData.mesero)
             }}
-            /*getOptionLabel={(option) => option.label}*/
-            /*getOptionValue={(option) => option.value}*/
+            getOptionLabel={(option) => option.name}
+            getOptionValue={(option) => option.id}
           />
         </div>
 
