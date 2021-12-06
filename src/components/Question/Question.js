@@ -14,7 +14,7 @@ const Question = ( { inputName, title, onClick, onChangeValue }, ref ) => {
                     <h1>{ title }</h1>
                     <div>
                         
-                        { [ ...Array(5) ].map( (star, i) => {
+                        { [ ... Array(5) ].map( (star, i) => {
 
                             const ratingValue = i + 1
 
@@ -23,6 +23,7 @@ const Question = ( { inputName, title, onClick, onChangeValue }, ref ) => {
                                 <Form.Label>
                                     <Form.Control
                                         ref={ref}
+                                        key={ "radio-" + i }
                                         type="radio"
                                         name={ inputName }
                                         value={ ratingValue }
@@ -32,6 +33,7 @@ const Question = ( { inputName, title, onClick, onChangeValue }, ref ) => {
                                     />
                                     <FaStar
                                         
+                                        key={ "star-" + i }
                                         className="ratingStar"
                                         color={ ratingValue <= ( hover || rating ) ? "#ffc107" : "#e4e5e9" }
                                         onMouseEnter={ () => setHover( ratingValue ) }
