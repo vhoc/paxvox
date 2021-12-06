@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './FieldSelect.module.css'
 import Select from 'react-select'
 
-const FieldSelect = ( props, ref ) => {
+const FieldSelect = ( props ) => {
 
     // States
     const [optionsMeseros, setOptionsMeseros] = useState([{ name: 'Cargando...', id: '0' },])
@@ -39,12 +39,13 @@ const FieldSelect = ( props, ref ) => {
     return <div id="nombre-mesero" className="questionWrapper col-10 col-sm-8">
     <h1>{ props.title }</h1>
     <Select
+      ref={props.forwardedRef.current}
       aria-label={ props.title }
       name={ props.inputName }
       options={ optionsMeseros }
       onChange={(e) => {
-        setNombreMesero(e.id)
-        scrollHandler(componentFrecuenciaVisitaRef)
+        props.setNombreMesero(e.id)
+        props.handleChildScroll(props.forwardedNextRef)
       }}
       getOptionLabel={(option) => option.name}
       getOptionValue={(option) => option.id}

@@ -1,12 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import './App.css'
 import Question from './components/Question/Question'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Form from 'react-bootstrap/Form'
-import Select from 'react-select'
 import Button from 'react-bootstrap/Button'
 import { FaTelegramPlane } from 'react-icons/fa'
-//import FieldSelect from './components/FieldSelect/FieldSelect'
+import FieldSelect from './components/FieldSelect/FieldSelect'
 
 function App() {
   /**
@@ -21,9 +20,6 @@ function App() {
   const [clienteNombre, setClienteNombre] = useState('')
   const [clienteEmail, setClienteEmail] = useState('')
   const [clienteTelefono, setClienteTelefono] = useState('')
-  const [optionsMeseros, setOptionsMeseros] = useState([
-    { name: 'Cargando...', id: '0' },
-  ])
 
   /**
    * References
@@ -96,10 +92,17 @@ function App() {
     })
   }
 
+  const handleChildScroll = (ref) => {
+    window.scrollTo({
+      behavior: 'smooth',
+      top: ref.current.offsetTop,
+    })
+  }
+
   /**
    * Get a list of waiters (meseros) from our API
    * and save them into their State.
-   */
+   
   useEffect(() => {
     fetch(`https://paxvox.waxy.app/api/waiters/1`, {
       method: 'GET',
@@ -123,7 +126,7 @@ function App() {
 
         setOptionsMeseros(meseros)
       })
-  }, [])
+  }, [])*/
 
   return (
     <div className="App">
@@ -132,21 +135,13 @@ function App() {
         className="d-flex flex-column align-items-center"
         onSubmit={handleSubmit}
       >
-        <div id="nombre-mesero" className="questionWrapper col-10 col-sm-8">
-          <h1>Selecciona tu Mesero</h1>
-          <Select
-            ref={questionNombreMeseroRef}
-            aria-label="Selecciona tu mesero"
-            name="nombre-mesero"
-            options={optionsMeseros}
-            onChange={(e) => {
-              setNombreMesero(e.id)
-              scrollHandler(componentFrecuenciaVisitaRef)
-            }}
-            getOptionLabel={(option) => option.name}
-            getOptionValue={(option) => option.id}
-          />
-        </div>
+        <FieldSelect
+          forwardedRef={questionNombreMeseroRef}
+          forwardedNextRef={componentFrecuenciaVisitaRef}
+          locationId="1"
+          setNombreMesero={ nombreMesero => setNombreMesero(nombreMesero) }
+          handleChildScroll={ handleChildScroll }
+        />
 
         <div
           id="frecuencia-visita"
