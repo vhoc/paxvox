@@ -99,35 +99,6 @@ function App() {
     })
   }
 
-  /**
-   * Get a list of waiters (meseros) from our API
-   * and save them into their State.
-   
-  useEffect(() => {
-    fetch(`https://paxvox.waxy.app/api/waiters/1`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        const meseros = []
-
-        for (const key in data) {
-          const mesero = {
-            id: key,
-            name: data[key].name,
-          }
-          meseros.push(mesero)
-        }
-
-        setOptionsMeseros(meseros)
-      })
-  }, [])*/
-
   return (
     <div className="App">
 
