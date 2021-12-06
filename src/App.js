@@ -1,13 +1,14 @@
 import React, { useState, useRef } from 'react'
 import './App.css'
-import Question from './components/Question/Question'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import Question from './components/Question/Question'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import { FaTelegramPlane } from 'react-icons/fa'
 import FieldSelectMeseros from './components/FieldSelectMeseros/FieldSelectMeseros'
+import { FaTelegramPlane } from 'react-icons/fa'
 
 function App() {
+
   /**
    * States
    */
@@ -24,13 +25,6 @@ function App() {
   /**
    * References
    */
-  const questionNombreMeseroRef = useRef()
-  const questionFrecuenciaVisitaRef = useRef()
-  const questionAtencionMeseroRef = useRef()
-  const questionRapidezServicioRef = useRef()
-  const questionCalidadComidaRef = useRef()
-  const questionExperienciaGeneralRef = useRef()
-
   const componentFrecuenciaVisitaRef = useRef()
   const componentAtencionMeseroRef = useRef()
   const componentRapidezServicioRef = useRef()
@@ -108,98 +102,66 @@ function App() {
       >
         <FieldSelectMeseros
           title="Selecciona tu mesero"
-          forwardedRef={questionNombreMeseroRef}
           forwardedNextRef={componentFrecuenciaVisitaRef}
           locationId="1"
           setNombreMesero={ nombreMesero => setNombreMesero(nombreMesero) }
           handleChildScroll={ handleChildScroll }
         />
-
-        <div
-          id="frecuencia-visita"
-          className="questionWrapper"
+        
+        <Question
           ref={componentFrecuenciaVisitaRef}
-        >
-          <Question
-            ref={questionFrecuenciaVisitaRef}
-            inputName="frecuencia-visita"
-            nextId="#atencion-mesero"
-            title="¿Qué tan seguido nos visitas?"
-            value={frecuenciaVisita}
-            onChangeValue={handleChangeFrecuenciaVisita}
-            onClick={(e) => {
-              scrollHandler(componentAtencionMeseroRef)
-            }}
-          />
-        </div>
+          inputName="frecuencia-visita"
+          nextId="#atencion-mesero"
+          title="¿Qué tan seguido nos visitas?"
+          value={frecuenciaVisita}
+          onChangeValue={handleChangeFrecuenciaVisita}
+          onClick={(e) => {
+            scrollHandler(componentAtencionMeseroRef)
+          }}
+        />
 
-        <div
-          id="atencion-mesero"
-          className="questionWrapper"
+        <Question
           ref={componentAtencionMeseroRef}
-        >
-          <Question
-            ref={questionAtencionMeseroRef}
-            inputName="atencion-mesero"
-            nextId="#rapidez-servicio"
-            title="Atención del Mesero"
-            value={atencionMesero}
-            onChangeValue={handleChangeAtencionMesero}
-            onClick={() => scrollHandler(componentRapidezServicioRef)}
-          />
-        </div>
-
-        <div
-          id="rapidez-servicio"
-          className="questionWrapper"
+          inputName="atencion-mesero"
+          nextId="#rapidez-servicio"
+          title="Atención del Mesero"
+          value={atencionMesero}
+          onChangeValue={handleChangeAtencionMesero}
+          onClick={() => scrollHandler(componentRapidezServicioRef)}
+        />
+        <Question
           ref={componentRapidezServicioRef}
-        >
-          <Question
-            ref={questionRapidezServicioRef}
-            inputName="rapidez-servicio"
-            nextId="#calidad-comida"
-            title="Rapidez en el Servicio"
-            value={rapidezServicio}
-            onChangeValue={handleChangeRapidezServicio}
-            onClick={() => scrollHandler(componentCalidadComidaRef)}
-          />
-        </div>
+          inputName="rapidez-servicio"
+          nextId="#calidad-comida"
+          title="Rapidez en el Servicio"
+          value={rapidezServicio}
+          onChangeValue={handleChangeRapidezServicio}
+          onClick={() => scrollHandler(componentCalidadComidaRef)}
+        />
 
-        <div
-          id="calidad-comida"
-          className="questionWrapper"
+        <Question
           ref={componentCalidadComidaRef}
-        >
-          <Question
-            ref={questionCalidadComidaRef}
-            inputName="calidad-comida"
-            nextId="#experiencia-general"
-            title="Sabor y Frescura de la Comida"
-            value={calidadComida}
-            onChangeValue={handleChangeCalidadComida}
-            onClick={() => scrollHandler(componentExperienciaGeneralRef)}
-          />
-        </div>
+          inputName="calidad-comida"
+          nextId="#experiencia-general"
+          title="Sabor y Frescura de la Comida"
+          value={calidadComida}
+          onChangeValue={handleChangeCalidadComida}
+          onClick={() => scrollHandler(componentExperienciaGeneralRef)}
+        />
 
-        <div
-          id="experiencia-general"
-          className="questionWrapper"
+        <Question
           ref={componentExperienciaGeneralRef}
-        >
-          <Question
-            ref={questionExperienciaGeneralRef}
-            inputName="experiencia-general"
-            nextId="#datos-cliente"
-            title="¿Cual fue tu experiencia general en Mariscos El Rey?"
-            value={experienciaGeneral}
-            onChangeValue={handleChangeExperienciaGeneral}
-            onClick={() => scrollHandler(d1)}
-          />
-        </div>
+          inputName="experiencia-general"
+          nextId="#datos-cliente"
+          title="¿Cual fue tu experiencia general en Mariscos El Rey?"
+          value={experienciaGeneral}
+          onChangeValue={handleChangeExperienciaGeneral}
+          onClick={() => scrollHandler(d1)}
+        />
 
         <div id="datos-cliente" className="datosClienteWrapper" ref={d1}>
           <h1>¿Puedes contarnos un poco de ti?</h1>
-          <h3>Es opcional &#128521;</h3>
+          <h3>Es opcional <span role="img" aria-label="guiño">&#128521;</span></h3>
 
           {/* Nombre */}
           <Form.Group
