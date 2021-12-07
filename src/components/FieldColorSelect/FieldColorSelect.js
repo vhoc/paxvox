@@ -17,7 +17,7 @@ const FieldColorSelect = (props, ref) => {
                 <Button
                     className={ [classes.optionButton, "btn-danger"]}
                     onClick={ (e) => {
-                            props.setFrecuenciaVisita(1)
+                            props.setFrecuenciaVisita("1")
                             props.onClick(e)
                         }
                     }
@@ -28,34 +28,34 @@ const FieldColorSelect = (props, ref) => {
                 <Button
                     className={ [classes.optionButton, "btn-warning"]}
                     onClick={ (e) => {
-                            props.setFrecuenciaVisita(2)
+                            props.setFrecuenciaVisita("2")
                             props.onClick(e)
                         }
                     }
                 >
-                    Más de 1 vez al Año
+                    Más de 1 vez al <strong>Año</strong>
                 </Button>
 
                 <Button
                     className={ [classes.optionButton, "btn-success"]}
                     onClick={ (e) => {
-                            props.setFrecuenciaVisita(3)
+                            props.setFrecuenciaVisita("3")
                             props.onClick(e)
                         }
                     }
                 >
-                    Más de 1 vez al Mes
+                    Más de 1 vez al <strong>Mes</strong>
                 </Button>
 
                 <Button
                     className={ [classes.optionButton, "btn-primary"] }
                         onClick={ (e) => {
-                            props.setFrecuenciaVisita(4)
+                            props.setFrecuenciaVisita("4")
                             props.onClick(e)
                         }
                     }
                 >
-                    Más de 1 vez a la Semana
+                    Más de 1 vez a la <strong>Semana</strong>
                 </Button>
             </div>
 

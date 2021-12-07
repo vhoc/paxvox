@@ -19,9 +19,14 @@ function App() {
   const [rapidezServicio, setRapidezServicio] = useState('')
   const [calidadComida, setCalidadComida] = useState('')
   const [experienciaGeneral, setExperienciaGeneral] = useState('')
-  const [clienteNombre, setClienteNombre] = useState('')
-  const [clienteEmail, setClienteEmail] = useState('')
-  const [clienteTelefono, setClienteTelefono] = useState('')
+  const [clienteNombre, setClienteNombre] = useState('Anónimo')
+  const [clienteEmail, setClienteEmail] = useState('No proporcionado')
+  const [clienteTelefono, setClienteTelefono] = useState('No proporcionado')
+
+  // Validation states
+  const [validationClienteNombre, setValidationClienteNombre] = useState(true)
+  const [validationClienteEmail, setValidationClienteEmail] = useState(true)
+  const [validationClienteTelefono, setValidationClienteTelefono] = useState(true)
 
   /**
    * References
@@ -48,6 +53,27 @@ function App() {
     clienteTelefono: clienteTelefono,
   }
 
+  /** Validation Helper */
+  const validateString = (sringState, validationState, string, pattern) => {
+    // Since the field is not required, leaving it blank passes the validation
+    if ( string === "" ) {
+      sringState("No proporcionado")
+      validationState(true)
+      console.log("campo vacío y válido")
+    } else {
+      // If it's not empty, validate the string.
+      if (string.match(pattern)) {
+        sringState(string)
+        validationState(true)
+        console.log("campo válido")
+      } else {
+        sringState("")
+        validationState(false)
+        console.log("campo inválido")
+      }
+    }
+  }
+
   /**
    * Handler for the form submission.
    * @param {*} event
@@ -55,18 +81,33 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    console.log(formData)
+    if ( validationClienteNombre && validationClienteEmail && validationClienteTelefono ) {
+      console.log(formData)
+      console.log("Datos enviados.")
+    } else {
+      console.log(formData)
+      console.log("Datos inválidos.")
+    }
+    
   }
 
   /** Event Handlers */
-  const handleChangeFrecuenciaVisita = (event) => setFrecuenciaVisita(event.target.value)
   const handleChangeAtencionMesero = (event) => setAtencionMesero(event.target.value)
   const handleChangeRapidezServicio = (event) => setRapidezServicio(event.target.value)
   const handleChangeCalidadComida = (event) => setCalidadComida(event.target.value)
   const handleChangeExperienciaGeneral = (event) => setExperienciaGeneral(event.target.value)
-  const handleChangeClienteNombre = (event) => setClienteNombre(event.target.value)
-  const handleChangeClienteEmail = (event) => setClienteEmail(event.target.value)
-  const handleChangeClienteTelefono = (event) => setClienteTelefono(event.target.value)
+  
+  const handleChangeClienteNombre = (event) => {
+    validateString( setClienteNombre, setValidationClienteNombre, event.target.value, /^[\p{L} ,.'-]+$/u )
+  }
+
+  const handleChangeClienteEmail = (event) => {
+    validateString( setClienteEmail, setValidationClienteEmail, event.target.value, /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g )
+  }
+
+  const handleChangeClienteTelefono = (event) => {
+    validateString( setClienteTelefono, setValidationClienteTelefono, event.target.value, /([+(\d]{1})(([\d+() -.]){5,16})([+(\d]{1})/gm )
+  }
 
   /**
    * Handler for the scroll that triggers when a user
@@ -75,13 +116,6 @@ function App() {
   const scrollHandler = (ref) => {
     window.scrollTo({
       behaviour: 'smooth',
-      top: ref.current.offsetTop,
-    })
-  }
-
-  const handleChildScroll = (ref) => {
-    window.scrollTo({
-      behavior: 'smooth',
       top: ref.current.offsetTop,
     })
   }
@@ -99,7 +133,7 @@ function App() {
           forwardedNextRef={componentFrecuenciaVisitaRef}
           locationId="1"
           setNombreMesero={ nombreMesero => setNombreMesero(nombreMesero) }
-          handleChildScroll={ handleChildScroll }
+          scrollHandler={ scrollHandler }
         />
 
         <FieldColorSelect

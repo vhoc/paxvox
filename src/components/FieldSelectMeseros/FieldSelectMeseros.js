@@ -50,7 +50,7 @@ const FieldSelectMeseros = ( props ) => {
       options={ optionsMeseros }
       onChange={(e) => {
         props.setNombreMesero(e.id)
-        props.handleChildScroll(props.forwardedNextRef)
+        props.scrollHandler(props.forwardedNextRef)
       }}
       getOptionLabel={(option) => option.name}
       getOptionValue={(option) => option.id}
