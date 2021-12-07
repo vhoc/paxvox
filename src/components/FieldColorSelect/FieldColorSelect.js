@@ -5,8 +5,6 @@ import Button from 'react-bootstrap/Button'
 
 const FieldColorSelect = (props, ref) => {
 
-    //const [frecuencia, setFrecuencia] = useState(null)
-
     return <div ref={ref} className={classes.questionWrapper}>
     
         <h1>{ props.title }</h1>

@@ -2,11 +2,10 @@ import React, { useState, useRef } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Question from './components/Question/Question'
+import CustomerData from './components/CustomerData/CustomerData'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
 import FieldSelectMeseros from './components/FieldSelectMeseros/FieldSelectMeseros'
 import FieldColorSelect from './components/FieldColorSelect/FieldColorSelect'
-import { FaTelegramPlane } from 'react-icons/fa'
 
 function App() {
 
@@ -53,27 +52,6 @@ function App() {
     clienteTelefono: clienteTelefono,
   }
 
-  /** Validation Helper */
-  const validateString = (sringState, validationState, string, pattern) => {
-    // Since the field is not required, leaving it blank passes the validation
-    if ( string === "" ) {
-      sringState("No proporcionado")
-      validationState(true)
-      console.log("campo vacío y válido")
-    } else {
-      // If it's not empty, validate the string.
-      if (string.match(pattern)) {
-        sringState(string)
-        validationState(true)
-        console.log("campo válido")
-      } else {
-        sringState("")
-        validationState(false)
-        console.log("campo inválido")
-      }
-    }
-  }
-
   /**
    * Handler for the form submission.
    * @param {*} event
@@ -96,18 +74,7 @@ function App() {
   const handleChangeRapidezServicio = (event) => setRapidezServicio(event.target.value)
   const handleChangeCalidadComida = (event) => setCalidadComida(event.target.value)
   const handleChangeExperienciaGeneral = (event) => setExperienciaGeneral(event.target.value)
-  
-  const handleChangeClienteNombre = (event) => {
-    validateString( setClienteNombre, setValidationClienteNombre, event.target.value, /^[\p{L} ,.'-]+$/u )
-  }
 
-  const handleChangeClienteEmail = (event) => {
-    validateString( setClienteEmail, setValidationClienteEmail, event.target.value, /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g )
-  }
-
-  const handleChangeClienteTelefono = (event) => {
-    validateString( setClienteTelefono, setValidationClienteTelefono, event.target.value, /([+(\d]{1})(([\d+() -.]){5,16})([+(\d]{1})/gm )
-  }
 
   /**
    * Handler for the scroll that triggers when a user
@@ -183,61 +150,19 @@ function App() {
           onClick={() => scrollHandler(d1)}
         />
 
-        <div id="datos-cliente" className="datosClienteWrapper" ref={d1}>
-          <h1>¿Puedes contarnos un poco de ti?</h1>
-          <h3>Es opcional <span role="img" aria-label="guiño">&#128521;</span></h3>
-
-          {/* Nombre */}
-          <Form.Group
-            className="mb-3 col-10 col-sm-8"
-            controlId="formBasicText"
-          >
-            <Form.Control
-              type="text"
-              placeholder="Nombre"
-              name="nombre"
-              onChange={handleChangeClienteNombre}
-            />
-          </Form.Group>
-
-          {/* E-mail */}
-          <Form.Group
-            className="mb-3 col-10 col-sm-8"
-            controlId="formBasicEmail"
-          >
-            <Form.Control
-              type="email"
-              placeholder="Correo electrónico"
-              name="email"
-              onChange={handleChangeClienteEmail}
-            />
-          </Form.Group>
-
-          {/* Teléfono */}
-          <Form.Group className="col-10 col-sm-8" controlId="formBasicPhone">
-            <Form.Control
-              type="tel"
-              placeholder="Número telefónico"
-              name="telefono"
-              onChange={handleChangeClienteTelefono}
-            />
-          </Form.Group>
-
-          <small className="mt-1 text-white">
-            * Al poner tus datos aceptas recibir descuentos, promociones y
-            noticias en tu correo o teléfono.
-          </small>
-
-          <Button
-            variant="primary"
-            size="lg"
-            className="buttonSend"
-            type="submit"
-          >
-            <FaTelegramPlane /> Finalizar
-          </Button>
-        </div>
+        <CustomerData
+          ref={d1}
+          inputName="datos-cliente"
+          title={ {h1: "¿Puedes contarnos un poco de ti?", h3: "Es opcional 😉" } }
+          setClienteNombre={ clienteNombre => setClienteNombre(clienteNombre)}
+          setClienteEmail={ clienteEmail => setClienteEmail(clienteEmail)}
+          setClienteTelefono={clienteTelefono => setClienteTelefono(clienteTelefono)}
+          setValidationClienteNombre={validationClienteNombre => setValidationClienteNombre(validationClienteNombre)}
+          setValidationClienteEmail={validationClienteEmail => setValidationClienteEmail(validationClienteEmail)}
+          setValidationClienteTelefono={validationClienteTelefono => setValidationClienteTelefono(validationClienteTelefono)}
+        />        
       </Form>
+
     </div>
   )
 }
