@@ -13,13 +13,13 @@ function App() {
   /**
    * States
    */
-  const [nombreMesero, setNombreMesero] = useState(undefined)
+  const [nombreMesero, setNombreMesero] = useState('')
   const [frecuenciaVisita, setFrecuenciaVisita] = useState('')
   const [atencionMesero, setAtencionMesero] = useState('')
   const [rapidezServicio, setRapidezServicio] = useState('')
   const [calidadComida, setCalidadComida] = useState('')
   const [experienciaGeneral, setExperienciaGeneral] = useState('')
-  const [clienteNombre, setClienteNombre] = useState('Anónimo')
+  const [clienteNombre, setClienteNombre] = useState('No proporcionado')
   const [clienteEmail, setClienteEmail] = useState('No proporcionado')
   const [clienteTelefono, setClienteTelefono] = useState('No proporcionado')
 

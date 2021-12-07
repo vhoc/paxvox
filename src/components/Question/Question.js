@@ -20,9 +20,8 @@ const Question = ( { inputName, title, onClick, onChangeValue }, ref ) => {
 
                         return ( 
                             
-                            <Form.Label>
+                            <Form.Label key={i}>
                                 <Form.Control
-                                    key={ "radio-" + i }
                                     type="radio"
                                     name={ inputName }
                                     value={ ratingValue }
@@ -31,8 +30,6 @@ const Question = ( { inputName, title, onClick, onChangeValue }, ref ) => {
                                     
                                 />
                                 <FaStar
-                                    
-                                    key={ "star-" + i }
                                     className="ratingStar"
                                     color={ ratingValue <= ( hover || rating ) ? "#ffc107" : "#e4e5e9" }
                                     onMouseEnter={ () => setHover( ratingValue ) }
