@@ -59,12 +59,19 @@ function App() {
    * @param {*} event
    */
   const handleSubmit = (event) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json' },
+      body: JSON.stringify(formData)
+    }
+
     event.preventDefault()
 
     // Check all validation states to be true.
     if ( validationClienteNombre && validationClienteEmail && validationClienteTelefono ) {
-      console.log(formData)
-      console.log("Datos enviados.")
+      fetch('https://paxvox.waxy.app/api/submissions', requestOptions)
+      .then(response => response.json())
+      .catch(error => console.error(error))
     } else {
       console.log(formData)
       console.log("Datos inválidos.")
