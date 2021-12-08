@@ -65,6 +65,7 @@ const CustomerData = (props, ref) => {
                         placeholder="Nombre"
                         name="nombre"
                         onChange={handleChangeClienteNombre}
+                        maxLength="24"
                     />
                     {internalValidationNombre === false && <small className={classes.error}>El nombre que has escrito no es válido.</small> }
                 </Form.Group>
@@ -79,6 +80,7 @@ const CustomerData = (props, ref) => {
                         placeholder="Correo electrónico"
                         name="email"
                         onChange={handleChangeClienteEmail}
+                        maxLength="48"
                     />
                     {internalValidationEmail === false && <small className={classes.error}>El correo electrónico que has escrito no es válido.</small> }
                 </Form.Group>
@@ -90,6 +92,7 @@ const CustomerData = (props, ref) => {
                         placeholder="Número telefónico"
                         name="telefono"
                         onChange={handleChangeClienteTelefono}
+                        maxLength="15"
                     />
                     {internalValidationTelefono === false && <small className={classes.error}>El teléfono que has ingresado no tiene un formato o longitud válidos.</small> }
                 </Form.Group>
