@@ -19,19 +19,16 @@ const CustomerData = (props, ref) => {
           stringState("No proporcionado")
           validationState(true)
           internalValidationState(true)
-          console.log("campo vacío y válido")
         } else {
           // If it's not empty, validate the string.
           if (string.match(pattern)) {
             stringState(string)
             validationState(true)
             internalValidationState(true)
-            console.log("campo válido")
           } else {
             stringState("")
             validationState(false)
             internalValidationState(false)
-            console.log("campo inválido")
           }
         }
       }
