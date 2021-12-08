@@ -40,16 +40,18 @@ function App() {
   /**
    * Form Data container object
    */
-  const formData = {
-    mesero: nombreMesero,
-    frecuenciaVisita: frecuenciaVisita,
-    atencionMesero: atencionMesero,
-    rapidezServicio: rapidezServicio,
-    calidadComida: calidadComida,
-    experienciaGeneral: experienciaGeneral,
+  const formData = {    
     clienteNombre: clienteNombre,
     clienteEmail: clienteEmail,
     clienteTelefono: clienteTelefono,
+    responses: {
+      mesero: nombreMesero,
+      frecuenciaVisita: frecuenciaVisita,
+      atencionMesero: atencionMesero,
+      rapidezServicio: rapidezServicio,
+      calidadComida: calidadComida,
+      experienciaGeneral: experienciaGeneral,
+    }
   }
 
   /**
