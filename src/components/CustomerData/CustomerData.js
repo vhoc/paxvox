@@ -53,12 +53,12 @@ const CustomerData = (props, ref) => {
                 className="mb-3 col-10 col-sm-8"
                 controlId="formBasicText"
                 >
-                <Form.Control
-                    type="text"
-                    placeholder="Nombre"
-                    name="nombre"
-                    onChange={handleChangeClienteNombre}
-                />
+                    <Form.Control
+                        type="text"
+                        placeholder="Nombre"
+                        name="nombre"
+                        onChange={handleChangeClienteNombre}
+                    />
                 </Form.Group>
 
                 {/* E-mail */}
@@ -66,22 +66,22 @@ const CustomerData = (props, ref) => {
                 className="mb-3 col-10 col-sm-8"
                 controlId="formBasicEmail"
                 >
-                <Form.Control
-                    type="email"
-                    placeholder="Correo electrónico"
-                    name="email"
-                    onChange={handleChangeClienteEmail}
-                />
+                    <Form.Control
+                        type="email"
+                        placeholder="Correo electrónico"
+                        name="email"
+                        onChange={handleChangeClienteEmail}
+                    />
                 </Form.Group>
 
                 {/* Teléfono */}
                 <Form.Group className="col-10 col-sm-8" controlId="formBasicPhone">
-                <Form.Control
-                    type="tel"
-                    placeholder="Número telefónico"
-                    name="telefono"
-                    onChange={handleChangeClienteTelefono}
-                />
+                    <Form.Control
+                        type="tel"
+                        placeholder="Número telefónico"
+                        name="telefono"
+                        onChange={handleChangeClienteTelefono}
+                    />
                 </Form.Group>
 
                 <small className="mt-1 text-white">
