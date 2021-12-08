@@ -38,7 +38,7 @@ function App() {
   const d1 = useRef()
 
   /**
-   * Form Data object
+   * Form Data container object
    */
   const formData = {
     mesero: nombreMesero,
@@ -59,6 +59,7 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    // Check all validation states to be true.
     if ( validationClienteNombre && validationClienteEmail && validationClienteTelefono ) {
       console.log(formData)
       console.log("Datos enviados.")
@@ -74,7 +75,6 @@ function App() {
   const handleChangeRapidezServicio = (event) => setRapidezServicio(event.target.value)
   const handleChangeCalidadComida = (event) => setCalidadComida(event.target.value)
   const handleChangeExperienciaGeneral = (event) => setExperienciaGeneral(event.target.value)
-
 
   /**
    * Handler for the scroll that triggers when a user
