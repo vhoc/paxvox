@@ -1,4 +1,4 @@
-import React, {forwardRef} from 'react'
+import React, {forwardRef, useState} from 'react'
 import classes from './CustomerData.module.css'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -6,24 +6,31 @@ import { FaTelegramPlane } from 'react-icons/fa'
 
 const CustomerData = (props, ref) => {
 
+  const [internalValidationNombre, setInternalValidationNombre] = useState(true)
+  const [internalValidationEmail, setInternalValidationEmail] = useState(true)
+  const [internalValidationTelefono, setInternalValidationTelefono] = useState(true)
+
     /**
      * Helpers
      */
-     const validateString = (stringState, validationState, string, pattern) => {
+     const validateString = (stringState, validationState, internalValidationState, string, pattern) => {
         // Since the field is not required, leaving it blank passes the validation
         if ( string === "" ) {
           stringState("No proporcionado")
           validationState(true)
+          internalValidationState(true)
           console.log("campo vacío y válido")
         } else {
           // If it's not empty, validate the string.
           if (string.match(pattern)) {
             stringState(string)
             validationState(true)
+            internalValidationState(true)
             console.log("campo válido")
           } else {
             stringState("")
             validationState(false)
+            internalValidationState(false)
             console.log("campo inválido")
           }
         }
@@ -33,15 +40,15 @@ const CustomerData = (props, ref) => {
      * Handlers
      */
      const handleChangeClienteNombre = (event) => {
-        validateString( props.setClienteNombre, props.setValidationClienteNombre, event.target.value, /^[\p{L} ,.'-]+$/u )
+        validateString( props.setClienteNombre, props.setValidationClienteNombre, setInternalValidationNombre, event.target.value, /^[\p{L} ,.'-]+$/u )
       }
     
       const handleChangeClienteEmail = (event) => {
-        validateString( props.setClienteEmail, props.setValidationClienteEmail, event.target.value, /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g )
+        validateString( props.setClienteEmail, props.setValidationClienteEmail, setInternalValidationEmail, event.target.value, /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/g )
       }
     
       const handleChangeClienteTelefono = (event) => {
-        validateString( props.setClienteTelefono, props.setValidationClienteTelefono, event.target.value, /([+(\d]{1})(([\d+() -.]){5,16})([+(\d]{1})/gm )
+        validateString( props.setClienteTelefono, props.setValidationClienteTelefono, setInternalValidationTelefono, event.target.value, /([+(\d]{1})(([\d+() -.]){5,16})([+(\d]{1})/gm )
       }
 
     return <div id={props.inputName} className={classes.datosClienteWrapper} ref={ref}>
@@ -59,6 +66,7 @@ const CustomerData = (props, ref) => {
                         name="nombre"
                         onChange={handleChangeClienteNombre}
                     />
+                    {internalValidationNombre === false && <small className={classes.error}>El nombre que has escrito no es válido.</small> }
                 </Form.Group>
 
                 {/* E-mail */}
@@ -72,6 +80,7 @@ const CustomerData = (props, ref) => {
                         name="email"
                         onChange={handleChangeClienteEmail}
                     />
+                    {internalValidationEmail === false && <small className={classes.error}>El correo electrónico que has escrito no es válido.</small> }
                 </Form.Group>
 
                 {/* Teléfono */}
@@ -82,6 +91,7 @@ const CustomerData = (props, ref) => {
                         name="telefono"
                         onChange={handleChangeClienteTelefono}
                     />
+                    {internalValidationTelefono === false && <small className={classes.error}>El teléfono que has ingresado no tiene un formato o longitud válidos.</small> }
                 </Form.Group>
 
                 <small className="mt-1 text-white">
