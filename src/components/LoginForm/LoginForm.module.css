@@ -12,6 +12,6 @@ label {
     font-size: 1.5em;
 }
 
-input[type=text], input[type=password] {
+.loginInputs {
     font-size: 1.5em;
 }

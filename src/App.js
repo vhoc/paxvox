@@ -4,16 +4,20 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Main from './pages/Main'
 import LoginForm from './components/LoginForm/LoginForm'
+import { AuthProvider } from './AuthContext'
+
+export const AuthContext = React.createContext()
 
 const App = () => {
 
-
   return (
     <div className="App">
-      <Routes>
-        <Route exact path='/' element={ <LoginForm/> }/>
-        <Route exact path='/main' element={ <Main /> }/>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route exact path='/' element={ <LoginForm/> }/>
+          <Route exact path='/main' element={ <Main /> }/>
+        </Routes>
+      </AuthProvider>
 
     </div>
   )
