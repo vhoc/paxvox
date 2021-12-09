@@ -1,0 +1,55 @@
+html {
+    --star-active: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(255,203,0,1) 100%);
+    --star-inactive: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(91,90,90,1) 100%);
+    min-width: 320px;
+  }
+  
+  .App {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgb(19, 10, 5);
+  }
+  
+  input[ type="radio" ] {
+    display: none;
+  }
+  
+  .App-link {
+    color: #61dafb;
+  }
+  
+  h1, h3 {
+    color: white;
+  }
+  
+  .datosClienteWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    min-height:auto;
+  }
+  
+  .datosClienteWrapper p {
+    color: white;
+  }
+  
+  .buttonSend {
+    margin-top: 1rem;
+    width: 35%;
+    align-self: center;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  .questionWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    min-height:auto;
+  }
