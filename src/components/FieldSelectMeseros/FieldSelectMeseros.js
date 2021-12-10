@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import './FieldSelectMeseros.module.css'
 import Select from 'react-select'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import {Navigate} from 'react-router-dom'
 
 const FieldSelectMeseros = ( props ) => {
 
@@ -11,36 +14,35 @@ const FieldSelectMeseros = ( props ) => {
      * Function getWaiters para obtener los meseros del API
      */
     const getWaiters = () => {
-        
-      fetch(`https://paxvox.waxy.app/api/waiters/${props.locationId}`, {
-        method: 'GET',
+
+      axios.get(`https://paxvox.waxy.app/api/waiters/${props.locationId}`, {
         headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        const meseros = []
-
-        for (const key in data) {
-          const mesero = {
-            id: key,
-            name: data[key].name,
-          }
-          meseros.push(mesero)
+          Authorization: localStorage.getItem('token')
         }
+      })
+      .then(response => {
+        setOptionsMeseros(response.data)
+      })
+      .catch(error => {
+        switch(error.response.status) {
+          case 401:
+              Swal.fire("Error", "No se pudo obtener la lista de meseros. Vuelva a ingresar al sistema", "error")
+              localStorage.removeItem('token')
+              return <Navigate to="/"/>
+          default:
+              Swal.fire("Error", `Ha ocurrido un error: (${error.response.data})`, "error")
+              console.log(`${error.message}`)
+              break;
+        }
+      })
 
-        setOptionsMeseros(meseros)
-      });
     }
 
     /**
      * Effect: Get list of waiters (meseros) and
      * populate the Select input with it.
      */
-     useEffect(getWaiters, [])
+    useEffect(getWaiters, [])
 
     return <div id="nombre-mesero" className="questionWrapper col-10 col-sm-8">
     <h1>{ props.title }</h1>

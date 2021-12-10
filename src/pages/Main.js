@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import {Navigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 import './Main.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Question from './../components/Question/Question'
@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form'
 import FieldSelectMeseros from './../components/FieldSelectMeseros/FieldSelectMeseros'
 import FieldColorSelect from './../components/FieldColorSelect/FieldColorSelect'
 import Swal from 'sweetalert2'
+import axios from 'axios'
 
 const Main = () => {
   
@@ -42,7 +43,7 @@ const Main = () => {
   /**
    * Form Data container object
    */
-  const formData = {    
+  const formData = {
     clienteNombre: clienteNombre,
     clienteEmail: clienteEmail,
     clienteTelefono: clienteTelefono,
@@ -56,18 +57,18 @@ const Main = () => {
     }
   }
 
+  let navigate = useNavigate()
+
   /**
    * Handler for the form submission.
    * @param {*} event
    */
   const handleSubmit = (event) => {
     const requestOptions = {
-      method: 'POST',
-      headers: new Headers({
+      headers: {
         'Content-Type':'application/json',
-        'Authorization':'Bearer '
-      }),
-      body: JSON.stringify(formData)
+        'Authorization':localStorage.getItem('token')
+      },
     }
 
     event.preventDefault()
@@ -80,18 +81,26 @@ const Main = () => {
 
     // Check all validation states to be true.
     if ( validationClienteNombre && validationClienteEmail && validationClienteTelefono ) {
-      fetch('https://paxvox.waxy.app/api/submissions', requestOptions)
+      axios.post('https://paxvox.waxy.app/api/submissions', formData, requestOptions)
       .then(response => {
-        if (response.status !== 201) {
-          Swal.fire("Error",response.statusText, "warning" )
-        } else {
-          Swal.fire("¡Gracias!","Recibimos tu respuesta. ¡Gracias por tu ayuda!", "success" )
-          response.json()
-        }
+        Swal.fire("¡Gracias!","Recibimos tu respuesta. ¡Gracias por tu ayuda!", "success" )
+      })
+      .then( () => {
+        navigate('/', {replace: true})
       })
       .catch(error => {
-        Swal.fire("Error", `No se pudo realizar el envío de las respuestas. (${error})`, "error")
+        console.log(error);
+        switch(error.response.status) {
+          case 401:
+            Swal.fire("Error", "Error al enviar las respuestas, es necesario ingresar de nuevo.", "error").then(()=> window.location = "/" )
+            break;
+          default:
+            console.log(`${error.message}`)
+            Swal.fire("Error", `Error desconocido: (${error.response.data})`, "error")
+            break;
+        }
       })
+      
     } else {
       Swal.fire("Error", `Verifica que los datos que ingresaste sean correctos`, "error")
     }
@@ -131,6 +140,7 @@ const Main = () => {
 
   return (
       <Form
+        id="poll"
         className="d-flex flex-column align-items-center"
         onSubmit={handleSubmit}
       >
