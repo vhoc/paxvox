@@ -8,6 +8,13 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useAuth, useUpdateAuth } from '../../AuthContext'
 
+/**
+ * LoginForm Component
+ * 
+ * Authenticates user and password on a remote Lumen API
+ * If successful, it saves the provided token to Local Storage
+ * and redirects to "/main" where the poll form is.
+ */
 const LoginForm = () => {
 
     const [username, setUsername] = useState('')
@@ -16,14 +23,11 @@ const LoginForm = () => {
     const auth = useAuth()
     const doAuth = useUpdateAuth()
 
-    //const [isAuthenticated, setAuthenticated] = useState(false)
-
     const handleSubmit = (event) => {
         event.preventDefault()
 
         const payload = { username: username, password: password }
 
-        //console.log(payload)
         axios.post('https://paxvox.waxy.app/api/login', payload)
         .then(response => {
             localStorage.setItem('token', `Bearer ${response.data.token}`)
@@ -46,10 +50,12 @@ const LoginForm = () => {
 
     }
 
+    // Loads the form when there is a token in localStorage.
     if ( localStorage.getItem('token') ) {
         return <Navigate to="/main"/>
     }
     
+    // Loads the form as soon as we log in. (First time log-in)
     if( auth ) {
         return <Navigate to="/main"/>
     }

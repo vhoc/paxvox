@@ -8,6 +8,16 @@ import { AuthProvider } from './AuthContext'
 
 export const AuthContext = React.createContext()
 
+/**
+ * DISCLAIMER:
+ * This app uses a rather primitive authentication system.
+ * This is a learning project. I know for a fact that there are a lot better and proper ways
+ * to do all the things done here.
+ * 
+ * I set up a Context to handle user authentication.
+ * The app starts at the LoginForm component on route "/"
+ * and redirects to "/main" on successful authentication.
+ */
 const App = () => {
 
   return (
