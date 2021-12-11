@@ -3,6 +3,13 @@ import './Question.css'
 import { Form } from "react-bootstrap"
 import { FaStar } from 'react-icons/fa'
 
+/**
+ * Question component.
+ * @param {object} props 
+ * @param {*} ref
+ * 
+ * 5 star control with values from 1 through 4.
+ */
 const Question = ( props, ref ) => {
 
     const [ rating , setRating ]    = useState( null )

@@ -1,20 +1,24 @@
 import React, { useState, useRef } from 'react'
 import {Navigate, useNavigate} from 'react-router-dom'
-import './Main.css'
-import 'bootstrap/dist/css/bootstrap.min.css'
+
 import Question from './../components/Question/Question'
 import CustomerData from './../components/CustomerData/CustomerData'
 import Form from 'react-bootstrap/Form'
 import FieldSelectMeseros from './../components/FieldSelectMeseros/FieldSelectMeseros'
 import FieldColorSelect from './../components/FieldColorSelect/FieldColorSelect'
+
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
+import './Main.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 const Main = () => {
   
-
   /**
-   * States
+   * States.
+   * These will hold the selected/inputted data in the form
+   * and their validation states (See CustomerData component).
    */
   const [nombreMesero, setNombreMesero] = useState('')
   const [frecuenciaVisita, setFrecuenciaVisita] = useState('')
@@ -31,7 +35,10 @@ const Main = () => {
   const [validationClienteTelefono, setValidationClienteTelefono] = useState(true)
 
   /**
-   * References
+   * References.
+   * Their purpose is to identify the form fields components
+   * to automatically scroll to the next one when the user clicks
+   * or touches on the controls. See 'scrollHandler()' function.
    */
   const componentFrecuenciaVisitaRef = useRef()
   const componentAtencionMeseroRef = useRef()
@@ -42,6 +49,8 @@ const Main = () => {
 
   /**
    * Form Data container object
+   * This is fed from the States and will be sent
+   * to the API.
    */
   const formData = {
     clienteNombre: clienteNombre,
@@ -57,8 +66,17 @@ const Main = () => {
     }
   }
 
+  /**
+   * Helpers
+   */
   let navigate = useNavigate()
 
+  /**
+   * submitForm (object)
+   * @param {object} data 
+   * 
+   * Posts the collected form data to the API.
+   */
   const submitForm = async (data) => {
     const requestOptions = {
       headers: {
@@ -88,8 +106,10 @@ const Main = () => {
   }
 
   /**
-   * Handler for the form submission.
-   * @param {*} event
+   * handleSubmit (event)
+   * @param {event} event
+   * 
+   * Validates and executes the submission of the data to the API.
    */
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -109,7 +129,9 @@ const Main = () => {
     
   }
 
-  /** Event Handlers */
+  /**
+   * Event Handlers
+   * */
   const handleChangeAtencionMesero = (event) => {
     setAtencionMesero(event.target.value)
   }
@@ -124,8 +146,8 @@ const Main = () => {
   }
 
   /**
-   * Handler for the scroll that triggers when a user
-   * selects and option.
+   * scrollHandler(reference)
+   * Scrolls to the next form field.
    */
   const scrollHandler = (ref) => {
     window.scrollTo({
@@ -138,8 +160,7 @@ const Main = () => {
   if ( !localStorage.getItem('token') ) {
     console.log("no token found")
     return <Navigate to="/"/>
-  }
-  
+  }  
 
   return (
       <Form

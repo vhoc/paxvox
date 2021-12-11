@@ -11,7 +11,11 @@ const FieldSelectMeseros = ( props ) => {
     const [optionsMeseros, setOptionsMeseros] = useState([{ name: 'Cargando...', id: '0' },])
 
     /**
-     * Function getWaiters para obtener los meseros del API
+     * getWaiters
+     * @param {string} location 
+     * @returns {object}
+     * 
+     * Obtains the list of waiters from the API.
      */
     const getWaiters = async (location) => {
 
@@ -34,14 +38,6 @@ const FieldSelectMeseros = ( props ) => {
               break;
         }
       }
-      
-/*
-      .then(response => {
-        setOptionsMeseros(response.data)
-      })
-      .catch(error => {
-        
-      })*/
 
     }
 
@@ -51,20 +47,24 @@ const FieldSelectMeseros = ( props ) => {
      */
     useEffect(() => getWaiters(props.locationId), [props.locationId])
 
-    return <div id="nombre-mesero" className="questionWrapper col-10 col-sm-8">
-    <h1>{ props.title }</h1>
-    <Select
-      aria-label={ props.title }
-      name={ props.inputName }
-      options={ optionsMeseros }
-      onChange={(e) => {
-        props.setNombreMesero(e.name)
-        props.scrollHandler(props.forwardedNextRef)
-      }}
-      getOptionLabel={(option) => option.name}
-      getOptionValue={(option) => option.id}
-    />
-  </div>
+    return (
+    
+      <div id="nombre-mesero" className="questionWrapper col-10 col-sm-8">
+        <h1>{ props.title }</h1>
+        <Select
+          aria-label={ props.title }
+          name={ props.inputName }
+          options={ optionsMeseros }
+          onChange={(e) => {
+            props.setNombreMesero(e.name)
+            props.scrollHandler(props.forwardedNextRef)
+          }}
+          getOptionLabel={(option) => option.name}
+          getOptionValue={(option) => option.id}
+        />
+      </div>
+
+    )
 
 }
 

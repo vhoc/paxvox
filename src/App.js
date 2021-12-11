@@ -21,6 +21,7 @@ export const AuthContext = React.createContext()
 const App = () => {
 
   return (
+
     <div className="App">
       <AuthProvider>
         <Routes>
@@ -28,9 +29,10 @@ const App = () => {
           <Route exact path='/main' element={ <Main /> }/>
         </Routes>
       </AuthProvider>
-
     </div>
+
   )
+  
 }
 
 export default App

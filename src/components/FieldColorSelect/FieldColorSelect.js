@@ -3,6 +3,13 @@ import classes from './FieldColorSelect.module.css'
 import { Form } from "react-bootstrap"
 import Button from 'react-bootstrap/Button'
 
+/**
+ * FieldColorSelect component.
+ * @param {object} props 
+ * @param {*} ref
+ * 
+ * 4 button control with values from 1 through 4.
+ */
 const FieldColorSelect = (props, ref) => {
 
     return <div ref={ref} className={classes.questionWrapper}>

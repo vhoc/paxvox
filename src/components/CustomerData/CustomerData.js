@@ -34,7 +34,7 @@ const CustomerData = (props, ref) => {
       }
 
     /**
-     * Handlers
+     * Handlers for validation.
      */
      const handleChangeClienteNombre = (event) => {
         validateString( props.setClienteNombre, props.setValidationClienteNombre, setInternalValidationNombre, event.target.value, /^[\p{L} ,.'-]+$/u )
