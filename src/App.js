@@ -11,7 +11,7 @@ export const AuthContext = React.createContext()
 /**
  * DISCLAIMER:
  * This app uses a rather primitive authentication system.
- * This is a learning project. I know for a fact that there are a lot better and proper ways
+ * This is a learning project. I know for a fact that there must be a lot better and proper ways
  * to do all the things done here.
  * 
  * I set up a Context to handle user authentication.

@@ -59,11 +59,7 @@ const Main = () => {
 
   let navigate = useNavigate()
 
-  /**
-   * Handler for the form submission.
-   * @param {*} event
-   */
-  const handleSubmit = (event) => {
+  const submitForm = async (data) => {
     const requestOptions = {
       headers: {
         'Content-Type':'application/json',
@@ -71,6 +67,31 @@ const Main = () => {
       },
     }
 
+    try {
+      await axios.post('https://paxvox.waxy.app/api/submissions', data, requestOptions)
+      Swal.fire("¡Gracias!","Recibimos tu respuesta. ¡Gracias por tu ayuda!", "success" )
+      navigate('/', {replace: true})
+    } catch (exception) {
+      console.log(exception);
+      switch(exception.response.status) {
+        case 401:
+          Swal.fire("Error", "Error al enviar las respuestas, es necesario ingresar de nuevo.", "error").then(()=> window.location = "/" )
+          break;
+        default:
+          console.log(`${exception.message}`)
+          Swal.fire("Error", `Error desconocido: (${exception.response.data})`, "error")
+          break;
+      }
+    }
+    
+
+  }
+
+  /**
+   * Handler for the form submission.
+   * @param {*} event
+   */
+  const handleSubmit = (event) => {
     event.preventDefault()
 
     // Check all questions have been rated.
@@ -78,29 +99,10 @@ const Main = () => {
       Swal.fire("Error", `No has calificado todos los criterios.`, "warning")
       return
     }
-
+  
     // Check all validation states to be true.
     if ( validationClienteNombre && validationClienteEmail && validationClienteTelefono ) {
-      axios.post('https://paxvox.waxy.app/api/submissions', formData, requestOptions)
-      .then(response => {
-        Swal.fire("¡Gracias!","Recibimos tu respuesta. ¡Gracias por tu ayuda!", "success" )
-      })
-      .then( () => {
-        navigate('/', {replace: true})
-      })
-      .catch(error => {
-        console.log(error);
-        switch(error.response.status) {
-          case 401:
-            Swal.fire("Error", "Error al enviar las respuestas, es necesario ingresar de nuevo.", "error").then(()=> window.location = "/" )
-            break;
-          default:
-            console.log(`${error.message}`)
-            Swal.fire("Error", `Error desconocido: (${error.response.data})`, "error")
-            break;
-        }
-      })
-      
+      submitForm(formData)      
     } else {
       Swal.fire("Error", `Verifica que los datos que ingresaste sean correctos`, "error")
     }

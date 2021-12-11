@@ -12,7 +12,7 @@ import { useAuth, useUpdateAuth } from '../../AuthContext'
  * LoginForm Component
  * 
  * Authenticates user and password on a remote Lumen API
- * If successful, it saves the provided token to Local Storage
+ * If successful, it saves the fetched token to Local Storage
  * and redirects to "/main" where the poll form is.
  */
 const LoginForm = () => {
@@ -23,18 +23,15 @@ const LoginForm = () => {
     const auth = useAuth()
     const doAuth = useUpdateAuth()
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
-
-        const payload = { username: username, password: password }
-
-        axios.post('https://paxvox.waxy.app/api/login', payload)
-        .then(response => {
-            localStorage.setItem('token', `Bearer ${response.data.token}`)
+    // Axios call to login onto the Lumen API
+    const doLogin = async (payload) => {
+        try {
+            const response = await axios.post('https://paxvox.waxy.app/api/login', payload)
+            const token = await response.data.token
+            localStorage.setItem('token', `Bearer ${token}`)
             doAuth()
-        })
-        .catch(error => {
-            switch(error.response.status) {
+        } catch (exception) {
+            switch(exception.response.status) {
                 case 422:
                     Swal.fire("Error", "Se requiere ingresar el usuario y la contraseña correctamente.", "error")
                     break;
@@ -42,12 +39,19 @@ const LoginForm = () => {
                     Swal.fire("Error", "Se ha ingresado un usuario o contraseña incorrecto(s).", "error")
                     break;
                 default:
-                    Swal.fire("Error", `Error desconocido: (${error.response.data})`, "error")
-                    console.log(`${error.message}`)
+                    Swal.fire("Error", `Error desconocido: (${exception.response.data})`, "error")
+                    console.log(`${exception.message}`)
                     break;
-            }           
-        })
+            }     
+        }
+        
 
+    }
+
+    // Submission Handler
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        doLogin({username: username, password: password})
     }
 
     // Loads the form when there is a token in localStorage.
