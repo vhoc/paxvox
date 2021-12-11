@@ -134,6 +134,7 @@ const Main = () => {
     })
   }
 
+  // Redirect to login form when no token is found on local storage.
   if ( !localStorage.getItem('token') ) {
     console.log("no token found")
     return <Navigate to="/"/>
@@ -172,6 +173,7 @@ const Main = () => {
           onChangeValue={handleChangeAtencionMesero}
           onClick={() => scrollHandler(componentRapidezServicioRef)}
         />
+
         <Question
           ref={componentRapidezServicioRef}
           inputName="rapidez-servicio"
