@@ -3,8 +3,8 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Main from './pages/Main'
-import LoginForm from './components/LoginForm/LoginForm'
-import { AuthProvider } from './AuthContext'
+//import LoginForm from './components/LoginForm/LoginForm'
+//import { AuthProvider } from './AuthContext'
 
 export const AuthContext = React.createContext()
 
@@ -23,12 +23,11 @@ const App = () => {
   return (
 
     <div className="App">
-      <AuthProvider>
         <Routes>
-          <Route exact path='/' element={ <LoginForm/> }/>
-          <Route exact path='/main' element={ <Main /> }/>
+          <Route exact path='/obregon' element={ <Main sucursal={1} /> }/>
+          <Route exact path='/guaymas' element={ <Main sucursal={2} /> }/>
+          <Route exact path='/hermosillo' element={ <Main sucursal={3} /> }/>
         </Routes>
-      </AuthProvider>
     </div>
 
   )

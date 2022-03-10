@@ -21,9 +21,6 @@ const FieldSelectMeseros = ( props ) => {
 
       try {
         const response = await axios.get(`https://paxvox.waxy.app/api/waiters/${location}`, {
-          headers: {
-            Authorization: localStorage.getItem('token')
-          }
         })
         setOptionsMeseros(response.data)
       } catch (exception) {

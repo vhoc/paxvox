@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react'
-import {Navigate, useNavigate} from 'react-router-dom'
+import React, { useState, useRef, useEffect } from 'react'
+import {useNavigate} from 'react-router-dom'
 
 import Question from './../components/Question/Question'
 import CustomerData from './../components/CustomerData/CustomerData'
@@ -13,7 +13,7 @@ import axios from 'axios'
 import './Main.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-const Main = () => {
+const Main = ( { sucursal } ) => {
   
   /**
    * States.
@@ -67,11 +67,6 @@ const Main = () => {
   }
 
   /**
-   * Helpers
-   */
-  let navigate = useNavigate()
-
-  /**
    * submitForm (object)
    * @param {object} data 
    * 
@@ -81,19 +76,21 @@ const Main = () => {
     const requestOptions = {
       headers: {
         'Content-Type':'application/json',
-        'Authorization':localStorage.getItem('token')
       },
     }
 
     try {
       await axios.post('https://paxvox.waxy.app/api/submissions', data, requestOptions)
-      Swal.fire("¡Gracias!","Recibimos tu respuesta. ¡Gracias por tu ayuda!", "success" )
-      navigate('/', {replace: true})
+      Swal.fire("¡Gracias!","Recibimos tu respuesta. ¡Gracias por tu ayuda!", "success" ).then( () => {
+        window.location.reload(false)
+      })
+      //navigate(`/${nombreSucursal}`, {replace: true})
+      
     } catch (exception) {
       console.log(exception);
       switch(exception.response.status) {
         case 401:
-          Swal.fire("Error", "Error al enviar las respuestas, es necesario ingresar de nuevo.", "error").then(()=> window.location = "/" )
+          Swal.fire("Error", "Error al enviar las respuestas (401)", "error")
           break;
         default:
           console.log(`${exception.message}`)
@@ -111,7 +108,7 @@ const Main = () => {
    * 
    * Validates and executes the submission of the data to the API.
    */
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     // Check all questions have been rated.
@@ -122,7 +119,7 @@ const Main = () => {
   
     // Check all validation states to be true.
     if ( validationClienteNombre && validationClienteEmail && validationClienteTelefono ) {
-      submitForm(formData)      
+      await submitForm(formData)
     } else {
       Swal.fire("Error", `Verifica que los datos que ingresaste sean correctos`, "error")
     }
@@ -157,10 +154,18 @@ const Main = () => {
   }
 
   // Redirect to login form when no token is found on local storage.
+  /*
   if ( !localStorage.getItem('token') ) {
     console.log("no token found")
     return <Navigate to="/"/>
-  }  
+  }*/
+
+  useEffect( () => {
+    window.scrollTo({
+      behaviour: 'smooth',
+      top: 0,
+    })
+  }, [] )
 
   return (
       <Form
@@ -171,8 +176,9 @@ const Main = () => {
 
         <FieldSelectMeseros
           title="Selecciona tu mesero"
+          //ref={ componentFieldSelectMeserosRef }
           forwardedNextRef={componentFrecuenciaVisitaRef}
-          locationId="1"
+          locationId={ sucursal }
           setNombreMesero={ nombreMesero => setNombreMesero(nombreMesero)}
           scrollHandler={ scrollHandler }
         />
