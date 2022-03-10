@@ -24,9 +24,9 @@ const App = () => {
 
     <div className="App">
         <Routes>
-          <Route exact path='/obregon' element={ <Main sucursal={1} /> }/>
-          <Route exact path='/guaymas' element={ <Main sucursal={2} /> }/>
-          <Route exact path='/hermosillo' element={ <Main sucursal={3} /> }/>
+          <Route exact path='/mariscoselrey/obregon' element={ <Main sucursal={1} /> }/>
+          <Route exact path='/mariscoselrey/guaymas' element={ <Main sucursal={2} /> }/>
+          <Route exact path='/mariscoselrey/hermosillo' element={ <Main sucursal={3} /> }/>
         </Routes>
     </div>
 
