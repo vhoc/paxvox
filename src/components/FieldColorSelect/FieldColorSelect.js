@@ -22,7 +22,7 @@ const FieldColorSelect = (props, ref) => {
                 <Button
                     className={ [classes.optionButton, "btn-danger"]}
                     onClick={ (e) => {
-                            props.setFrecuenciaVisita("1")
+                            props.setFrecuenciaVisita("Es mi Primera Vez")
                             props.onClick(e)
                         }
                     }
@@ -33,7 +33,7 @@ const FieldColorSelect = (props, ref) => {
                 <Button
                     className={ [classes.optionButton, "btn-warning"]}
                     onClick={ (e) => {
-                            props.setFrecuenciaVisita("2")
+                            props.setFrecuenciaVisita("Mas de una vez al AÑO")
                             props.onClick(e)
                         }
                     }
@@ -44,7 +44,7 @@ const FieldColorSelect = (props, ref) => {
                 <Button
                     className={ [classes.optionButton, "btn-success"]}
                     onClick={ (e) => {
-                            props.setFrecuenciaVisita("3")
+                            props.setFrecuenciaVisita("Mas de una vez al MES")
                             props.onClick(e)
                         }
                     }
@@ -55,7 +55,7 @@ const FieldColorSelect = (props, ref) => {
                 <Button
                     className={ [classes.optionButton, "btn-primary"] }
                         onClick={ (e) => {
-                            props.setFrecuenciaVisita("4")
+                            props.setFrecuenciaVisita("Mas de una vez a la SEMANA")
                             props.onClick(e)
                         }
                     }

@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react'
-import {useNavigate} from 'react-router-dom'
 
 import Question from './../components/Question/Question'
 import CustomerData from './../components/CustomerData/CustomerData'
@@ -20,6 +19,10 @@ const Main = ( { sucursal } ) => {
    * These will hold the selected/inputted data in the form
    * and their validation states (See CustomerData component).
    */
+  const [location, setLocation] = useState({
+    id: 0,
+    name: '',
+  })
   const [nombreMesero, setNombreMesero] = useState('')
   const [frecuenciaVisita, setFrecuenciaVisita] = useState('')
   const [atencionMesero, setAtencionMesero] = useState('')
@@ -56,6 +59,8 @@ const Main = ( { sucursal } ) => {
     clienteNombre: clienteNombre,
     clienteEmail: clienteEmail,
     clienteTelefono: clienteTelefono,
+    idLocation: location.id,
+    locationName: location.name,
     responses: {
       mesero: nombreMesero,
       frecuenciaVisita: frecuenciaVisita,
@@ -166,6 +171,20 @@ const Main = ( { sucursal } ) => {
       top: 0,
     })
   }, [] )
+
+  useEffect( () => {
+    const getLocation = async () => {
+      try {
+        const location = await axios.get( `https://paxvox.waxy.app/api/location/${ sucursal }` )
+        setLocation( location.data )
+      } catch ( error ) {
+        console.warn( error )
+      }
+    }
+    
+    getLocation()
+
+  }, [sucursal] )
 
   return (
       <Form
