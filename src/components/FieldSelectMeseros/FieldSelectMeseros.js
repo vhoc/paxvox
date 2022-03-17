@@ -52,6 +52,7 @@ const FieldSelectMeseros = ( props ) => {
           aria-label={ props.title }
           name={ props.inputName }
           options={ optionsMeseros }
+          isSearchable={ false } 
           onChange={(e) => {
             props.setNombreMesero(e.name)
             props.scrollHandler(props.forwardedNextRef)
