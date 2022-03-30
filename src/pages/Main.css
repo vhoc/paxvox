@@ -10,7 +10,7 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: rgb(19, 10, 5);
+    background: white;
   }
   
   input[ type="radio" ] {
@@ -22,7 +22,7 @@ html {
   }
   
   h1, h3 {
-    color: white;
+    color: black;
   }
   
   .datosClienteWrapper {
@@ -35,7 +35,7 @@ html {
   }
   
   .datosClienteWrapper p {
-    color: white;
+    color: black;
   }
   
   .buttonSend {

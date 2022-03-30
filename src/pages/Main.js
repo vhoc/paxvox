@@ -5,6 +5,7 @@ import CustomerData from './../components/CustomerData/CustomerData'
 import Form from 'react-bootstrap/Form'
 import FieldSelectMeseros from './../components/FieldSelectMeseros/FieldSelectMeseros'
 import FieldColorSelect from './../components/FieldColorSelect/FieldColorSelect'
+import FieldColorSelect5 from '../components/FieldColorSelect/FieldColorSelect5'
 
 import Swal from 'sweetalert2'
 import axios from 'axios'
@@ -206,37 +207,33 @@ const Main = ( { sucursal } ) => {
           ref={componentFrecuenciaVisitaRef}
           title="¿Cada cuándo nos visitas?"
           inputName="frecuencia-visita"
-          setFrecuenciaVisita={ frecuenciaVisita => setFrecuenciaVisita(frecuenciaVisita)}
+          setValue={ frecuenciaVisita => setFrecuenciaVisita(frecuenciaVisita)}
           onClick={() => scrollHandler(componentAtencionMeseroRef)}
         />
 
-        <Question
+        <FieldColorSelect5
           ref={componentAtencionMeseroRef}
-          inputName="atencion-mesero"
-          nextId="#rapidez-servicio"
           title="Atención del Mesero"
-          value={atencionMesero}
-          onChangeValue={handleChangeAtencionMesero}
+          inputName="atencion-mesero"
+          setValue={ atencionMesero => setAtencionMesero(atencionMesero)}
           onClick={() => scrollHandler(componentRapidezServicioRef)}
-        />
+        >
+        </FieldColorSelect5>
 
-        <Question
+        <FieldColorSelect5
           ref={componentRapidezServicioRef}
           inputName="rapidez-servicio"
-          nextId="#calidad-comida"
           title="Rapidez en el Servicio"
-          value={rapidezServicio}
-          onChangeValue={handleChangeRapidezServicio}
+          setValue={ rapidezServicio => setRapidezServicio(rapidezServicio)}
           onClick={() => scrollHandler(componentCalidadComidaRef)}
-        />
+        >
+        </FieldColorSelect5>
 
-        <Question
+        <FieldColorSelect5
           ref={componentCalidadComidaRef}
           inputName="calidad-comida"
-          nextId="#experiencia-general"
           title="Sabor y Frescura de la Comida"
-          value={calidadComida}
-          onChangeValue={handleChangeCalidadComida}
+          setValue={ calidadComida => setCalidadComida(calidadComida)}
           onClick={() => scrollHandler(componentExperienciaGeneralRef)}
         />
 
