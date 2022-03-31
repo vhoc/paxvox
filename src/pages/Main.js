@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
 
-import Question from './../components/Question/Question'
 import CustomerData from './../components/CustomerData/CustomerData'
 import Form from 'react-bootstrap/Form'
 import FieldSelectMeseros from './../components/FieldSelectMeseros/FieldSelectMeseros'
@@ -33,10 +32,12 @@ const Main = ( { sucursal } ) => {
   const [clienteNombre, setClienteNombre] = useState('No proporcionado')
   const [clienteEmail, setClienteEmail] = useState('No proporcionado')
   const [clienteTelefono, setClienteTelefono] = useState('No proporcionado')
+  const [clienteComentarios, setClienteComentarios] = useState('No proporcionado')
 
   const [validationClienteNombre, setValidationClienteNombre] = useState(true)
   const [validationClienteEmail, setValidationClienteEmail] = useState(true)
   const [validationClienteTelefono, setValidationClienteTelefono] = useState(true)
+  const [validationClienteComentarios, setValidationClienteComentarios] = useState(true)
 
   /**
    * References.
@@ -60,6 +61,7 @@ const Main = ( { sucursal } ) => {
     clienteNombre: clienteNombre,
     clienteEmail: clienteEmail,
     clienteTelefono: clienteTelefono,
+    clienteComentarios: clienteComentarios,
     idLocation: location.id,
     locationName: location.name,
     responses: {
@@ -124,7 +126,7 @@ const Main = ( { sucursal } ) => {
     }
   
     // Check all validation states to be true.
-    if ( validationClienteNombre && validationClienteEmail && validationClienteTelefono ) {
+    if ( validationClienteNombre && validationClienteEmail && validationClienteTelefono && validationClienteComentarios ) {
       await submitForm(formData)
     } else {
       Swal.fire("Error", `Verifica que los datos que ingresaste sean correctos`, "error")
@@ -135,6 +137,7 @@ const Main = ( { sucursal } ) => {
   /**
    * Event Handlers
    * */
+  /*
   const handleChangeAtencionMesero = (event) => {
     setAtencionMesero(event.target.value)
   }
@@ -147,6 +150,7 @@ const Main = ( { sucursal } ) => {
   const handleChangeExperienciaGeneral = (event) => {
     setExperienciaGeneral(event.target.value)
   }
+  */
 
   /**
    * scrollHandler(reference)
@@ -195,7 +199,8 @@ const Main = ( { sucursal } ) => {
       >
 
         <FieldSelectMeseros
-          title="Selecciona tu mesero"
+          number='1'
+          title={`Selecciona tu mesero`}
           //ref={ componentFieldSelectMeserosRef }
           forwardedNextRef={componentFrecuenciaVisitaRef}
           locationId={ sucursal }
@@ -205,6 +210,7 @@ const Main = ( { sucursal } ) => {
 
         <FieldColorSelect
           ref={componentFrecuenciaVisitaRef}
+          number='2'
           title="¿Cada cuándo nos visitas?"
           inputName="frecuencia-visita"
           setValue={ frecuenciaVisita => setFrecuenciaVisita(frecuenciaVisita)}
@@ -213,6 +219,7 @@ const Main = ( { sucursal } ) => {
 
         <FieldColorSelect5
           ref={componentAtencionMeseroRef}
+          number='3'
           title="Atención del Mesero"
           inputName="atencion-mesero"
           setValue={ atencionMesero => setAtencionMesero(atencionMesero)}
@@ -223,6 +230,7 @@ const Main = ( { sucursal } ) => {
         <FieldColorSelect5
           ref={componentRapidezServicioRef}
           inputName="rapidez-servicio"
+          number='4'
           title="Rapidez en el Servicio"
           setValue={ rapidezServicio => setRapidezServicio(rapidezServicio)}
           onClick={() => scrollHandler(componentCalidadComidaRef)}
@@ -232,31 +240,34 @@ const Main = ( { sucursal } ) => {
         <FieldColorSelect5
           ref={componentCalidadComidaRef}
           inputName="calidad-comida"
-          title="Sabor y Frescura de la Comida"
-          setValue={ calidadComida => setCalidadComida(calidadComida)}
+          number='5'
+          title="Sazón y presentación de los platillos"
+          setValue={ calidadComida => setCalidadComida(calidadComida) }
           onClick={() => scrollHandler(componentExperienciaGeneralRef)}
         />
 
-        <Question
+        <FieldColorSelect5
           ref={componentExperienciaGeneralRef}
           inputName="experiencia-general"
-          nextId="#datos-cliente"
+          number='6'
           title="¿Cual fue tu experiencia general en Mariscos El Rey?"
-          value={experienciaGeneral}
-          onChangeValue={handleChangeExperienciaGeneral}
+          setValue={ experienciaGeneral => setExperienciaGeneral(experienciaGeneral) }
           onClick={() => scrollHandler(d1)}
         />
 
         <CustomerData
           ref={d1}
           inputName="datos-cliente"
+          number='7'
           title={ {h1: "¿Puedes contarnos un poco de ti?", h3: "Es opcional 😉" } }
-          setClienteNombre={ clienteNombre => setClienteNombre(clienteNombre)}
-          setClienteEmail={ clienteEmail => setClienteEmail(clienteEmail)}
-          setClienteTelefono={clienteTelefono => setClienteTelefono(clienteTelefono)}
-          setValidationClienteNombre={validationClienteNombre => setValidationClienteNombre(validationClienteNombre)}
-          setValidationClienteEmail={validationClienteEmail => setValidationClienteEmail(validationClienteEmail)}
-          setValidationClienteTelefono={validationClienteTelefono => setValidationClienteTelefono(validationClienteTelefono)}
+          setClienteNombre={ clienteNombre => setClienteNombre(clienteNombre) }
+          setClienteEmail={ clienteEmail => setClienteEmail(clienteEmail) }
+          setClienteTelefono={ clienteTelefono => setClienteTelefono(clienteTelefono) }
+          setClienteComentarios={ clienteComentarios => setClienteComentarios(clienteComentarios) }
+          setValidationClienteNombre={ validationClienteNombre => setValidationClienteNombre(validationClienteNombre) }
+          setValidationClienteEmail={ validationClienteEmail => setValidationClienteEmail(validationClienteEmail) }
+          setValidationClienteTelefono={ validationClienteTelefono => setValidationClienteTelefono(validationClienteTelefono) }
+          setValidationClienteComentarios={ validationClienteComentarios => setValidationClienteComentarios(validationClienteComentarios) }
         />        
       </Form>
     )

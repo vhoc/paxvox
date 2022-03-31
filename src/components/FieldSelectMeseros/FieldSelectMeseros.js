@@ -47,6 +47,7 @@ const FieldSelectMeseros = ( props ) => {
     return (
     
       <div id="nombre-mesero" className="questionWrapper col-10 col-sm-8">
+        <h1>{ props.number }.</h1>
         <h1>{ props.title }</h1>
         <Select
           aria-label={ props.title }

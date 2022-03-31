@@ -14,24 +14,38 @@ const FieldColorSelect = (props, ref) => {
 
     return <div ref={ref} className={classes.questionWrapper}>
     
+        <h1>{ props.number }.</h1>
         <h1>{ props.title }</h1>
 
         <Form.Label>
 
             <div className={classes.optionsContainer}>
+
                 <Button
-                    className={ [classes.optionButton, "btn-danger"]}
-                    onClick={ (e) => {
-                            props.setValue("Es mi Primera Vez")
+                    className={ [classes.optionButton, classes.btnGreen].join(' ') }
+                        onClick={ (e) => {
+                            props.setValue("Mas de una vez a la SEMANA")
                             props.onClick(e)
                         }
                     }
                 >
-                    Primera Vez
+                    + de 1 vez a la <strong>Semana</strong>
                 </Button>
 
                 <Button
-                    className={ [classes.optionButton, "btn-warning"]}
+                    className={ [classes.optionButton, classes.btnYellow].join(' ') }
+                    onClick={ (e) => {
+                            props.setValue("Mas de una vez al MES")
+                            props.onClick(e)
+                        }
+                    }
+                >
+                    + de 1 vez al <strong>Mes</strong>
+                </Button>
+
+
+                <Button
+                    className={ [classes.optionButton, classes.btnOrange].join(' ') }
                     onClick={ (e) => {
                             props.setValue("Mas de una vez al AÑO")
                             props.onClick(e)
@@ -42,26 +56,17 @@ const FieldColorSelect = (props, ref) => {
                 </Button>
 
                 <Button
-                    className={ [classes.optionButton, "btn-success"]}
+                    className={ [classes.optionButton, classes.btnRed].join(' ') }
                     onClick={ (e) => {
-                            props.setValue("Mas de una vez al MES")
+                            props.setValue("Es mi Primera Vez")
                             props.onClick(e)
                         }
                     }
                 >
-                    + de 1 vez al <strong>Mes</strong>
+                    Primera Vez
                 </Button>
 
-                <Button
-                    className={ [classes.optionButton, "btn-primary"] }
-                        onClick={ (e) => {
-                            props.setValue("Mas de una vez a la SEMANA")
-                            props.onClick(e)
-                        }
-                    }
-                >
-                    + de 1 vez a la <strong>Semana</strong>
-                </Button>
+               
             </div>
 
         </Form.Label>

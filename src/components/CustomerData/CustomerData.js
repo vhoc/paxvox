@@ -9,6 +9,7 @@ const CustomerData = (props, ref) => {
   const [internalValidationNombre, setInternalValidationNombre] = useState(true)
   const [internalValidationEmail, setInternalValidationEmail] = useState(true)
   const [internalValidationTelefono, setInternalValidationTelefono] = useState(true)
+  const [internalValidationComentarios, setInternalValidationComentarios] = useState(true)
 
     /**
      * Helpers
@@ -48,7 +49,12 @@ const CustomerData = (props, ref) => {
         validateString( props.setClienteTelefono, props.setValidationClienteTelefono, setInternalValidationTelefono, event.target.value, /([+(\d]{1})(([\d+() -.]){5,16})([+(\d]{1})/gm )
       }
 
+      const handleChangeComentarios = (event) => {
+        validateString( props.setClienteComentarios, props.setValidationClienteComentarios, setInternalValidationComentarios, event.target.value, /^[\p{L} ,.'-]+$/u )
+      }
+
     return <div id={props.inputName} className={classes.datosClienteWrapper} ref={ref}>
+                <h1>{props.number}.</h1>
                 <h1>{props.title.h1}</h1>
                 <h3>{props.title.h3}</h3>
 
@@ -83,7 +89,7 @@ const CustomerData = (props, ref) => {
                 </Form.Group>
 
                 {/* Teléfono */}
-                <Form.Group className="col-10 col-sm-8" controlId="formBasicPhone">
+                <Form.Group className="mb-3 col-10 col-sm-8" controlId="formBasicPhone">
                     <Form.Control
                         type="tel"
                         placeholder="Número telefónico"
@@ -92,6 +98,18 @@ const CustomerData = (props, ref) => {
                         maxLength="15"
                     />
                     {internalValidationTelefono === false && <small className={classes.error}>El teléfono que has ingresado no tiene un formato o longitud válidos.</small> }
+                </Form.Group>
+
+                {/* Comentarios  */}
+                <Form.Group className="col-10 col-sm-8" controlId="formComments">
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    placeholder="Comentarios"
+                    name="comentarios"
+                    onChange={ handleChangeComentarios }
+                  />
+                  {internalValidationComentarios === false && <small className={classes.error}>Verifique que el comentario no tiene caracteres inválidos.</small> }
                 </Form.Group>
 
                 <small className="mt-1 text-white">

@@ -14,45 +14,23 @@ const FieldColorSelect5 = (props, ref) => {
 
     return <div ref={ref} className={classes.questionWrapper}>
     
-        <h1>{ props.title }</h1>
+        <h1>{ props.number }.</h1>
+        <h1 className="mb-5">{ props.title }</h1>
 
         <Form.Label>
 
             <div className={classes.optionsContainer}>
-                <Button
-                    className={ [classes.optionButton, classes.btnRed].join(' ') }
-                    variant={ 'red' }
-                    onClick={ (e) => {
-                            props.setValue("1")
-                            props.onClick(e)
-                        }
-                    }
-                >
-                    Muy Mal
-                </Button>
 
                 <Button
-                    className={ [classes.optionButton, classes.btnOrange].join(' ') }
-                    variant={ 'orange' }
-                    onClick={ (e) => {
-                            props.setValue("2")
+                    className={ [classes.optionButton, classes.btnExcellent].join( ' ' ) }
+                        variant={ 'excellent' }
+                        onClick={ (e) => {
+                            props.setValue("5")
                             props.onClick(e)
                         }
                     }
                 >
-                   Mal
-                </Button>
-
-                <Button
-                    className={ [classes.optionButton, classes.btnYellow].join(' ') }
-                    variant={ 'yellow' }
-                    onClick={ (e) => {
-                            props.setValue("3")
-                            props.onClick(e)
-                        }
-                    }
-                >
-                    Regular
+                    Excelente
                 </Button>
 
                 <Button
@@ -68,15 +46,39 @@ const FieldColorSelect5 = (props, ref) => {
                 </Button>
 
                 <Button
-                    className={ [classes.optionButton, classes.btnExcellent].join( ' ' ) }
-                        variant={ 'excellent' }
-                        onClick={ (e) => {
-                            props.setValue("5")
+                    className={ [classes.optionButton, classes.btnYellow].join(' ') }
+                    variant={ 'yellow' }
+                    onClick={ (e) => {
+                            props.setValue("3")
                             props.onClick(e)
                         }
                     }
                 >
-                    Excelente
+                    Regular
+                </Button>
+
+                <Button
+                    className={ [classes.optionButton, classes.btnOrange].join(' ') }
+                    variant={ 'orange' }
+                    onClick={ (e) => {
+                            props.setValue("2")
+                            props.onClick(e)
+                        }
+                    }
+                >
+                    Mal
+                </Button>
+
+                <Button
+                    className={ [classes.optionButton, classes.btnRed].join(' ') }
+                    variant={ 'red' }
+                    onClick={ (e) => {
+                            props.setValue("1")
+                            props.onClick(e)
+                        }
+                    }
+                >
+                    Muy Mal
                 </Button>
 
             </div>
