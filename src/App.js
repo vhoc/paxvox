@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Main from './pages/Main'
+import MainDelivery from './pages/MainDelivery'
 //import LoginForm from './components/LoginForm/LoginForm'
 //import { AuthProvider } from './AuthContext'
 
@@ -27,6 +28,7 @@ const App = () => {
           <Route exact path='/mariscoselrey/obregon' element={ <Main sucursal={1} /> }/>
           <Route exact path='/mariscoselrey/guaymas' element={ <Main sucursal={2} /> }/>
           <Route exact path='/mariscoselrey/hermosillo' element={ <Main sucursal={3} /> }/>
+          <Route exact path='/mariscoselrey/obregon-recoger' element={ <MainDelivery sucursal={4} /> }/>
         </Routes>
     </div>
 
