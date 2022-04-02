@@ -1,0 +1,161 @@
+h1 {
+    color: white;
+    font-size: 2rem;
+    padding-left: 1.8rem;
+    padding-right: 1.8rem;
+}
+
+.questionWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    min-height:auto;
+}
+
+@media only screen and (min-width: 0px) {
+    .optionsContainer {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .optionButton {
+        width: 40%;
+        height: 100px;
+        margin: 0.1rem;
+        padding: 1rem;
+        font-weight: bold;
+        font-size: 1.4em;
+        border-radius: 2rem;
+    }
+}
+
+@media only screen and (min-width: 480px) {
+
+    .optionButton {
+        width: 40%;
+        margin: 0.5rem;
+        font-size: 2em;
+        height: 160px;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .optionsContainer {
+        flex-wrap: nowrap;
+    }
+    .optionButton {
+        width: 22%;
+        margin: 1rem;
+        font-size: 2em;
+        height: 160px;
+    }
+}
+
+.btnRed {
+    color: #fff;
+    background-color: rgb(165, 49, 49);
+    border-color: rgb(165, 49, 49);
+}
+
+.btnRed:hover {
+    background-color: rgb(197, 72, 72);
+    border-color: rgb(197, 72, 72);
+}
+
+.btnRed:active {
+    background-color: rgb(197, 72, 72);
+    border-color: rgb(197, 72, 72);
+}
+
+.btnRed:visited {
+    background-color: rgb(197, 72, 72);
+    border-color: rgb(197, 72, 72);
+}
+
+.btnPagina {
+    color: #fff;
+    background-color: #704981;
+    border-color: #704981;
+}
+
+.btnPagina:hover {
+    background-color: #9C65B4;
+    border-color: #9C65B4;
+}
+
+.btnPagina:active {
+    background-color: #9C65B4;
+    border-color: #9C65B4;
+}
+
+.btnPagina:visited {
+    background-color: #9C65B4;
+    border-color: #9C65B4;
+}
+
+.btnTelefono {
+    color: #fff;
+    background-color: #717171 ;
+    border-color: #717171 ;
+}
+
+.btnTelefono:hover {
+    background-color: #A6A7A7;
+    border-color: #A6A7A7;
+}
+
+.btnTelefono:active {
+    background-color: #A6A7A7;
+    border-color: #A6A7A7;
+}
+
+.btnTelefono:visited {
+    background-color: #A6A7A7;
+    border-color: #A6A7A7;
+}
+
+.btnFacebook {
+    color: #fff;
+    background-color: #4267B2;
+    border-color: #4267B2;
+}
+
+.btnFacebook:hover {
+    background-color: #898F9C;
+    border-color: #898F9C;
+}
+
+.btnFacebook:active {
+    background-color: #898F9C;
+    border-color: #898F9C;
+}
+
+.btnFacebook:visited {
+    background-color: #898F9C;
+    border-color: #898F9C;
+}
+
+.btnWhatsApp {
+    color: white;
+    background-color:#128C7E;
+    border-color: #128C7E;
+}
+
+.btnWhatsApp:hover {
+    background-color: #25D366;
+    border-color: #25D366;
+}
+
+.btnWhatsApp:active {
+    background-color: #25D366;
+    border-color: #25D366;
+}
+
+.btnWhatsApp:visited {
+    background-color: #25D366;
+    border-color: #25D366;
+}

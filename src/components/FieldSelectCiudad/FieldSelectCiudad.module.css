@@ -1,0 +1,11 @@
+.questionWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    min-height:auto;
+}
+
+h1 {
+    color: black !important;
+}

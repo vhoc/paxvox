@@ -2,10 +2,11 @@ import React, { useState, useRef, useEffect } from 'react'
 
 import CustomerData from '../components/CustomerData/CustomerData'
 import Form from 'react-bootstrap/Form'
-import FieldSelectMeseros from '../components/FieldSelectMeseros/FieldSelectMeseros'
-import FieldColorSelect from '../components/FieldColorSelect/FieldColorSelect'
+import FieldSelectCiudad from '../components/FieldSelectCiudad/FieldSelectCiudad'
 import FieldColorSelect5 from '../components/FieldColorSelect/FieldColorSelect5'
-
+import SelectFormaPedido from '../components/FieldColorSelect/SelectFormaPedido'
+import SelectTiempoEntrega from '../components/FieldColorSelect/SelectTiempoEntrega'
+import CalidadDomicilio from '../components/FieldColorSelect/CalidadDomicilio'
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
@@ -23,12 +24,12 @@ const MainDelivery = ( { sucursal } ) => {
     id: 0,
     name: '',
   })
-  const [nombreMesero, setNombreMesero] = useState('')
-  const [frecuenciaVisita, setFrecuenciaVisita] = useState('')
-  const [atencionMesero, setAtencionMesero] = useState('')
-  const [rapidezServicio, setRapidezServicio] = useState('')
+  const [nombreCiudad, setNombreCiudad] = useState('')
+  const [formaPedido, setFormaPedido] = useState('')
+  const [tiempoEntrega, setTiempoEntrega] = useState('')
+  const [calidadAtencion, setCalidadAtencion] = useState('')
+  const [calificacionRepartidor, setCalificacionRepartidor] = useState('')
   const [calidadComida, setCalidadComida] = useState('')
-  const [experienciaGeneral, setExperienciaGeneral] = useState('')
   const [clienteNombre, setClienteNombre] = useState('No proporcionado')
   const [clienteEmail, setClienteEmail] = useState('No proporcionado')
   const [clienteTelefono, setClienteTelefono] = useState('No proporcionado')
@@ -45,11 +46,11 @@ const MainDelivery = ( { sucursal } ) => {
    * to automatically scroll to the next one when the user clicks
    * or touches on the controls. See 'scrollHandler()' function.
    */
-  const componentFrecuenciaVisitaRef = useRef()
-  const componentAtencionMeseroRef = useRef()
-  const componentRapidezServicioRef = useRef()
-  const componentCalidadComidaRef = useRef()
-  const componentExperienciaGeneralRef = useRef()
+  const componentFormaPedido = useRef()
+  const componentTiempoEntrega = useRef()
+  const componentCalidadAtencion = useRef()
+  const componentCalidadComida = useRef()
+  const componentCalificacionRepartidor = useRef()
   const d1 = useRef()
 
   /**
@@ -65,12 +66,12 @@ const MainDelivery = ( { sucursal } ) => {
     idLocation: location.id,
     locationName: location.name,
     responses: {
-      mesero: nombreMesero,
-      frecuenciaVisita: frecuenciaVisita,
-      atencionMesero: atencionMesero,
-      rapidezServicio: rapidezServicio,
+      nombreCiudad: nombreCiudad,
+      formaPedido: formaPedido,
+      tiempoEntrega: tiempoEntrega,
+      calidadAtencion: calidadAtencion,
       calidadComida: calidadComida,
-      experienciaGeneral: experienciaGeneral,
+      calificacionRepartidor: calificacionRepartidor,
     }
   }
 
@@ -120,7 +121,7 @@ const MainDelivery = ( { sucursal } ) => {
     event.preventDefault()
 
     // Check all questions have been rated.
-    if( nombreMesero === '' || frecuenciaVisita === '' || atencionMesero === '' || rapidezServicio === '' || calidadComida === '' || experienciaGeneral === '' ) {
+    if( nombreCiudad === '' || formaPedido === '' || tiempoEntrega === '' || calidadAtencion === '' || calidadComida === '' || calificacionRepartidor === '' ) {
       Swal.fire("Error", `No has calificado todos los criterios.`, "warning")
       return
     }
@@ -135,24 +136,6 @@ const MainDelivery = ( { sucursal } ) => {
   }
 
   /**
-   * Event Handlers
-   * */
-  /*
-  const handleChangeAtencionMesero = (event) => {
-    setAtencionMesero(event.target.value)
-  }
-  const handleChangeRapidezServicio = (event) => {
-    setRapidezServicio(event.target.value)
-  }
-  const handleChangeCalidadComida = (event) => {
-    setCalidadComida(event.target.value)
-  }
-  const handleChangeExperienciaGeneral = (event) => {
-    setExperienciaGeneral(event.target.value)
-  }
-  */
-
-  /**
    * scrollHandler(reference)
    * Scrolls to the next form field.
    */
@@ -162,13 +145,6 @@ const MainDelivery = ( { sucursal } ) => {
       top: ref.current.offsetTop,
     })
   }
-
-  // Redirect to login form when no token is found on local storage.
-  /*
-  if ( !localStorage.getItem('token') ) {
-    console.log("no token found")
-    return <Navigate to="/"/>
-  }*/
 
   useEffect( () => {
     window.scrollTo({
@@ -198,60 +174,58 @@ const MainDelivery = ( { sucursal } ) => {
         onSubmit={handleSubmit}
       >
 
-        <FieldSelectMeseros
+        <FieldSelectCiudad
           number='1'
-          title={`Selecciona tu mesero`}
+          title={`Selecciona tu ciudad`}
           //ref={ componentFieldSelectMeserosRef }
-          forwardedNextRef={componentFrecuenciaVisitaRef}
+          forwardedNextRef={componentFormaPedido}
           locationId={ sucursal }
-          setNombreMesero={ nombreMesero => setNombreMesero(nombreMesero)}
+          setNombreCiudad={ nombreCiudad => setNombreCiudad(nombreCiudad)}
           scrollHandler={ scrollHandler }
         />
 
-        <FieldColorSelect
-          ref={componentFrecuenciaVisitaRef}
+        <SelectFormaPedido
+          ref={componentFormaPedido}
           number='2'
-          title="¿Cada cuándo nos visitas?"
-          inputName="frecuencia-visita"
-          setValue={ frecuenciaVisita => setFrecuenciaVisita(frecuenciaVisita)}
-          onClick={() => scrollHandler(componentAtencionMeseroRef)}
+          title="¿Por qué medio fue tu pedido?"
+          inputName="forma-pedido"
+          setValue={ formaPedido => setFormaPedido(formaPedido)}
+          onClick={() => scrollHandler(componentTiempoEntrega)}
         />
 
-        <FieldColorSelect5
-          ref={componentAtencionMeseroRef}
+        <SelectTiempoEntrega
+          ref={componentTiempoEntrega}
           number='3'
-          title="Atención del Mesero"
-          inputName="atencion-mesero"
-          setValue={ atencionMesero => setAtencionMesero(atencionMesero)}
-          onClick={() => scrollHandler(componentRapidezServicioRef)}
-        >
-        </FieldColorSelect5>
-
-        <FieldColorSelect5
-          ref={componentRapidezServicioRef}
-          inputName="rapidez-servicio"
-          number='4'
-          title="Rapidez en el Servicio"
-          setValue={ rapidezServicio => setRapidezServicio(rapidezServicio)}
-          onClick={() => scrollHandler(componentCalidadComidaRef)}
-        >
-        </FieldColorSelect5>
-
-        <FieldColorSelect5
-          ref={componentCalidadComidaRef}
-          inputName="calidad-comida"
-          number='5'
-          title="Sazón y presentación de los platillos"
-          setValue={ calidadComida => setCalidadComida(calidadComida) }
-          onClick={() => scrollHandler(componentExperienciaGeneralRef)}
+          title="Tiempo de Entrega"
+          inputName="tiempo-entrega"
+          setValue={ tiempoEntrega => setTiempoEntrega(tiempoEntrega)}
+          onClick={() => scrollHandler(componentCalidadAtencion)}
         />
 
-        <FieldColorSelect5
-          ref={componentExperienciaGeneralRef}
-          inputName="experiencia-general"
+        <CalidadDomicilio
+          ref={componentCalidadAtencion}
+          inputName="atencion-domicilio"
+          number='4'
+          title="Calidad en la Atención"
+          setValue={ calidadAtencion => setCalidadAtencion(calidadAtencion)}
+          onClick={() => scrollHandler(componentCalidadComida)}
+        />
+
+        <CalidadDomicilio
+          ref={componentCalidadComida}
+          inputName="calidad-sazon"
+          number='5'
+          title="Calidad y sazón"
+          setValue={ calidadComida => setCalidadComida(calidadComida) }
+          onClick={() => scrollHandler(componentCalificacionRepartidor)}
+        />
+
+        <CalidadDomicilio
+          ref={componentCalificacionRepartidor}
+          inputName="opinion-repartidor"
           number='6'
-          title="¿Cual fue tu experiencia general en Mariscos El Rey?"
-          setValue={ experienciaGeneral => setExperienciaGeneral(experienciaGeneral) }
+          title="Opinión del repartidor"
+          setValue={ calificacionRepartidor => setCalificacionRepartidor(calificacionRepartidor) }
           onClick={() => scrollHandler(d1)}
         />
 
