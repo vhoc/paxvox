@@ -3,7 +3,6 @@ import React, { useState, useRef, useEffect } from 'react'
 import CustomerData from '../components/CustomerData/CustomerData'
 import Form from 'react-bootstrap/Form'
 import FieldSelectCiudad from '../components/FieldSelectCiudad/FieldSelectCiudad'
-import FieldColorSelect5 from '../components/FieldColorSelect/FieldColorSelect5'
 import SelectFormaPedido from '../components/FieldColorSelect/SelectFormaPedido'
 import SelectTiempoEntrega from '../components/FieldColorSelect/SelectTiempoEntrega'
 import CalidadDomicilio from '../components/FieldColorSelect/CalidadDomicilio'
@@ -89,7 +88,7 @@ const MainDelivery = ( { sucursal } ) => {
     }
 
     try {
-      await axios.post('https://paxvox.waxy.app/api/submissions', data, requestOptions)
+      await axios.post('https://paxvox.waxy.app/api/delivery-submissions', data, requestOptions)
       Swal.fire("¡Gracias!","Recibimos tu respuesta. ¡Gracias por tu ayuda!", "success" ).then( () => {
         window.location.reload(false)
       })
