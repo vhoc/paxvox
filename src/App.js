@@ -18,6 +18,8 @@ export const AuthContext = React.createContext()
  * I set up a Context to handle user authentication.
  * The app starts at the LoginForm component on route "/"
  * and redirects to "/main" on successful authentication.
+ * 
+ * Note: Authentication has been disabled, but I kept the code for reference.
  */
 const App = () => {
 
