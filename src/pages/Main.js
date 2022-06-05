@@ -5,6 +5,8 @@ import Form from 'react-bootstrap/Form'
 import FieldSelectMeseros from './../components/FieldSelectMeseros/FieldSelectMeseros'
 import FieldColorSelect from './../components/FieldColorSelect/FieldColorSelect'
 import FieldColorSelect5 from '../components/FieldColorSelect/FieldColorSelect5'
+import Button from 'react-bootstrap/Button'
+import classes from '../components/FieldColorSelect/FieldColorSelect.module.css'
 
 import Swal from 'sweetalert2'
 import axios from 'axios'
@@ -24,6 +26,7 @@ const Main = ( { sucursal } ) => {
     name: '',
   })
   const [nombreMesero, setNombreMesero] = useState('')
+  const [clienteMesa, setClienteMesa] = useState('')
   const [frecuenciaVisita, setFrecuenciaVisita] = useState('')
   const [atencionMesero, setAtencionMesero] = useState('')
   const [rapidezServicio, setRapidezServicio] = useState('')
@@ -46,6 +49,7 @@ const Main = ( { sucursal } ) => {
    * or touches on the controls. See 'scrollHandler()' function.
    */
   const componentFrecuenciaVisitaRef = useRef()
+  const componentClienteMesaRef = useRef()
   const componentAtencionMeseroRef = useRef()
   const componentRapidezServicioRef = useRef()
   const componentCalidadComidaRef = useRef()
@@ -59,6 +63,7 @@ const Main = ( { sucursal } ) => {
    */
   const formData = {
     clienteNombre: clienteNombre,
+    clienteMesa: clienteMesa,
     clienteEmail: clienteEmail,
     clienteTelefono: clienteTelefono,
     clienteComentarios: clienteComentarios,
@@ -135,24 +140,6 @@ const Main = ( { sucursal } ) => {
   }
 
   /**
-   * Event Handlers
-   * */
-  /*
-  const handleChangeAtencionMesero = (event) => {
-    setAtencionMesero(event.target.value)
-  }
-  const handleChangeRapidezServicio = (event) => {
-    setRapidezServicio(event.target.value)
-  }
-  const handleChangeCalidadComida = (event) => {
-    setCalidadComida(event.target.value)
-  }
-  const handleChangeExperienciaGeneral = (event) => {
-    setExperienciaGeneral(event.target.value)
-  }
-  */
-
-  /**
    * scrollHandler(reference)
    * Scrolls to the next form field.
    */
@@ -161,6 +148,11 @@ const Main = ( { sucursal } ) => {
       behaviour: 'smooth',
       top: ref.current.offsetTop,
     })
+  }
+
+  const handleMesaChange = event => {
+    if ( isNaN(event.target.value) ) event.target.value = ''
+    setClienteMesa( event.target.value )
   }
 
   // Redirect to login form when no token is found on local storage.
@@ -197,16 +189,39 @@ const Main = ( { sucursal } ) => {
         className="d-flex flex-column align-items-center"
         onSubmit={handleSubmit}
       >
-
         <FieldSelectMeseros
           number='1'
           title={`Selecciona tu mesero`}
           //ref={ componentFieldSelectMeserosRef }
-          forwardedNextRef={componentFrecuenciaVisitaRef}
+          forwardedNextRef={componentClienteMesaRef}
           locationId={ sucursal }
           setNombreMesero={ nombreMesero => setNombreMesero(nombreMesero)}
           scrollHandler={ scrollHandler }
         />
+
+        <Form.Group
+          className={`${classes.questionWrapper} d-flex justify-content-center align-items-center`}
+          controlId="mesa"
+          ref={componentClienteMesaRef}
+        >
+          <h1>2.<br/>Selecciona tu Mesa</h1>
+          <div className='col-6 col-xs-6 col-sm-3 col-md-3 col-lg-2 col-xl-2'>
+          <Form.Control
+            as='input'
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder=""
+            name="mesa"
+            onChange={handleMesaChange}
+            maxLength={2}
+          /></div>
+        
+        
+        <Button className='mt-2' onClick={() => scrollHandler(componentFrecuenciaVisitaRef)}>
+          Siguiente
+        </Button>
+        </Form.Group>
 
         <FieldColorSelect
           ref={componentFrecuenciaVisitaRef}
