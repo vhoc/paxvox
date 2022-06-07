@@ -26,7 +26,7 @@ const Main = ( { sucursal } ) => {
     name: '',
   })
   const [nombreMesero, setNombreMesero] = useState('')
-  const [clienteMesa, setClienteMesa] = useState('')
+  const [clienteMesa, setClienteMesa] = useState('0')
   const [frecuenciaVisita, setFrecuenciaVisita] = useState('')
   const [atencionMesero, setAtencionMesero] = useState('')
   const [rapidezServicio, setRapidezServicio] = useState('')
@@ -151,8 +151,11 @@ const Main = ( { sucursal } ) => {
   }
 
   const handleMesaChange = event => {
-    if ( isNaN(event.target.value) ) event.target.value = ''
-    setClienteMesa( event.target.value )
+    if ( isNaN(event.target.value) || event.target.value === null || event.target.value === undefined || event.target.value === '' ) {
+      setClienteMesa( '0' )
+    } else {
+      setClienteMesa( event.target.value )
+    }
   }
 
   // Redirect to login form when no token is found on local storage.
