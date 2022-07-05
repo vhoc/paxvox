@@ -229,7 +229,7 @@ const Main = ( { sucursal } ) => {
         <FieldColorSelect
           ref={componentFrecuenciaVisitaRef}
           number='2'
-          title="¿Cada cuándo nos visitas?"
+          title="¿Cada cuánto nos visitas?"
           inputName="frecuencia-visita"
           setValue={ frecuenciaVisita => setFrecuenciaVisita(frecuenciaVisita)}
           onClick={() => scrollHandler(componentAtencionMeseroRef)}
