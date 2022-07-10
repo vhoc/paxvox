@@ -1,14 +1,16 @@
 import React from 'react'
-import { TextField, FormControl, FormLabel, FormControlLabel, Checkbox, RadioGroup, Radio, Slider } from '@mui/material'
+import { TextField, FormControl, FormLabel, FormControlLabel, Checkbox, RadioGroup, Radio, Slider, Select, MenuItem, InputLabel } from '@mui/material'
 import { Typography } from '@mui/material'
 
 const PollField = ( {
     inputId,
     type,
+    name,
     title,
     required,
     checkOptions,
     radioOptions,
+    selectOptions,
     sliderMin,
     sliderMax,
     sliderDefault,
@@ -69,6 +71,33 @@ const PollField = ( {
                     />
                 </>
                 
+            )
+
+        case 'option-select':
+            return (
+                <>
+                    <Typography variant='h5' component={ `h5` } >{ title }</Typography>
+
+                    <FormControl fullWidth>
+                        <InputLabel id="demo-simple-select-label">Selecciona</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={ inputId }
+                            label={ name }
+                            //onChange={handleChange}
+                        >
+                        {
+                            selectOptions.length >= 1 &&
+                            selectOptions.map( ( option, index ) => (
+                                <MenuItem key={ index } value={ option.value }>{ option.name }</MenuItem>
+                            ) )  
+                        }                            
+                        </Select>
+                    </FormControl>
+                    
+                    
+                </>
             )
 
         case 'form-subtitle':

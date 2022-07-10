@@ -179,6 +179,23 @@ const Poll = ( { sucursal } ) => {
                     title: "¿Recomendarías a algún familiar, amigo o conocido a formar parte del equipo de Mariscos El Rey?",
                     required: true,
                 },
+                {
+                    inputId: "rango-edad",
+                    type: "option-select",
+                    checkOptions: [],
+                    radioOptions: [],
+                    selectOptions: [
+                        { name: "18-30", value: "18-30" },
+                        { name: "31-40", value: "31-40" },
+                        { name: "41-50", value: "41-50" },
+                        { name: "51-60", value: "51-60" },
+                        { name: "61-70", value: "61-70" },
+                        { name: "Más de 70", value: "Más de 70" },
+                    ],
+                    name: "Rango de Edad",
+                    title: "¿En qué rango de edad te encuentas?",
+                    required: false,
+                }
             ],
     })
 
@@ -213,6 +230,7 @@ const Poll = ( { sucursal } ) => {
                             type={ field.type }
                             checkOptions={ field.checkOptions }
                             radioOptions={ field.radioOptions }
+                            selectOptions={ field.selectOptions }
                             sliderMin={ field.sliderMin }
                             sliderMax={ field.sliderMax }
                             sliderDefault={ field.sliderDefault }
