@@ -57,7 +57,35 @@ const PollField = ( {
         setFieldData( [ { name: title, value: event.target.defaultValue } ] )
     }
 
-    // The Input change handler. It calls a different function to update the state depending on the input type
+    // Input Type: Slider
+    const setDataSlider = () => {
+        // Pending Implementation
+    }
+
+    // Input Type: OptionSelect
+    const setDataOptionSelect = () => {
+        // Pending implementation
+    }
+
+    // Input Type: Texarea
+    const setDataTextArea = () => {
+        // Pending implementation
+    }
+
+    // Input Type: Number
+    const setDataNumber = () => {
+        // Pending implementation
+    }
+
+    // Input Type: Email
+    const setDataEmail = () => {
+        // Pending implementation
+    }
+
+
+
+
+    // The Input change handler. It calls a different strategy to update the state depending on the input type
     const handleChange = ( type, event, option ) => {
         
         switch ( type ) {
@@ -71,6 +99,26 @@ const PollField = ( {
 
             case 'radio-group':
                 setDataRadioGroup( event )
+                break
+
+            case 'slider':
+                setDataSlider( event )
+                break
+
+            case 'option-select':
+                setDataOptionSelect( event )
+                break
+
+            case 'textarea':
+                setDataTextArea( event )
+                break
+
+            case 'number':
+                setDataNumber( event )
+                break
+
+            case 'email':
+                setDataEmail( event )
                 break
 
         }
